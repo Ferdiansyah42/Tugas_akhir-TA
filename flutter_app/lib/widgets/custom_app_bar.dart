@@ -164,9 +164,38 @@ class CustomAppBar extends StatelessWidget {
                     Expanded(
                       child: PopupMenuButton<String>(
                         initialValue: selectedFlock,
+                        tooltip: 'Pilih Blok Kandang',
                         onSelected: onFlockSelected,
                         itemBuilder: (context) => AppConstants.flocks
-                            .map((f) => PopupMenuItem(value: f, child: Text(f)))
+                            .map((f) => PopupMenuItem(
+                                  value: f,
+                                  child: Row(
+                                    children: [
+                                      Icon(
+                                        f == selectedFlock
+                                            ? Icons.check_circle_rounded
+                                            : Icons.radio_button_off_rounded,
+                                        size: 16,
+                                        color: f == selectedFlock
+                                            ? AppColors.primary
+                                            : AppColors.textMuted,
+                                      ),
+                                      const SizedBox(width: 8),
+                                      Text(
+                                        f,
+                                        style: TextStyle(
+                                          fontSize: 13,
+                                          fontWeight: f == selectedFlock
+                                              ? FontWeight.bold
+                                              : FontWeight.normal,
+                                          color: f == selectedFlock
+                                              ? AppColors.primary
+                                              : AppColors.textHeadline,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ))
                             .toList(),
                         child: Row(
                           mainAxisSize: MainAxisSize.min,

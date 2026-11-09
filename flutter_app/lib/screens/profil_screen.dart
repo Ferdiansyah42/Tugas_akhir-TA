@@ -21,6 +21,9 @@ class ProfilScreen extends StatefulWidget {
 }
 
 class _ProfilScreenState extends State<ProfilScreen> {
+  // State Kandang Aktif Terpilih
+  late String _currentFlock;
+
   // State Profil Peternak
   String _farmerName = 'Ferdiansyah';
   String _farmerRole = 'Kepala Kandang Broiler';
@@ -39,6 +42,49 @@ class _ProfilScreenState extends State<ProfilScreen> {
   bool _soundVibrationAlarm = true;
   bool _autoOfflineSync = true;
   String _temperatureUnit = 'Celsius (°C)';
+
+  @override
+  void initState() {
+    super.initState();
+    _currentFlock = widget.selectedFlock;
+  }
+
+  @override
+  void didUpdateWidget(covariant ProfilScreen oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (widget.selectedFlock != oldWidget.selectedFlock) {
+      _currentFlock = widget.selectedFlock;
+    }
+  }
+
+  void _selectFlock(String newFlock) {
+    if (_currentFlock != newFlock) {
+      setState(() {
+        _currentFlock = newFlock;
+      });
+      widget.onFlockChanged(newFlock);
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Row(
+            children: [
+              const Icon(Icons.check_circle_rounded, color: Colors.white, size: 20),
+              const SizedBox(width: 8),
+              Expanded(
+                child: Text(
+                  'Kandang aktif dialihkan ke $newFlock',
+                  style: const TextStyle(fontWeight: FontWeight.w600),
+                ),
+              ),
+            ],
+          ),
+          backgroundColor: AppColors.primary,
+          behavior: SnackBarBehavior.floating,
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+          duration: const Duration(seconds: 2),
+        ),
+      );
+    }
+  }
 
   void _showEditProfileDialog() {
     final nameController = TextEditingController(text: _farmerName);
@@ -177,6 +223,129 @@ class _ProfilScreenState extends State<ProfilScreen> {
                 },
               ),
             ],
+          ),
+        );
+      },
+    );
+  }
+
+  void _showFlockSelectionModal() {
+    final Map<String, Map<String, dynamic>> flockDetails = {
+      'Kandang Blok A': {
+        'populasi': '10.000 Ekor',
+        'desc': 'Closed House 1 • Fase Grower / Finisher',
+        'icon': Icons.cottage_rounded,
+      },
+      'Kandang Blok B': {
+        'populasi': '10.000 Ekor',
+        'desc': 'Closed House 2 • Fase Starter',
+        'icon': Icons.cottage_outlined,
+      },
+      'Kandang Blok C': {
+        'populasi': '12.000 Ekor',
+        'desc': 'Closed House 3 • Fase Brooding Awal',
+        'icon': Icons.warehouse_rounded,
+      },
+    };
+
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+      ),
+      builder: (context) {
+        return SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
+            child: SingleChildScrollView(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Text(
+                        'Pilih Kandang Aktif',
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                          color: AppColors.primary,
+                        ),
+                      ),
+                      IconButton(
+                        icon: const Icon(Icons.close, size: 20, color: AppColors.textMuted),
+                        onPressed: () => Navigator.pop(context),
+                        tooltip: 'Tutup',
+                      ),
+                    ],
+                  ),
+                  const Text(
+                    'Pilih blok kandang broiler untuk evaluasi mikroklimat dan rekomendasi inferensi fuzzy.',
+                    style: TextStyle(fontSize: 12, color: AppColors.textMuted),
+                  ),
+                  const SizedBox(height: 12),
+                  ...AppConstants.flocks.map((flock) {
+                    final isSelected = flock == _currentFlock;
+                    final details = flockDetails[flock];
+                    return Padding(
+                      padding: const EdgeInsets.only(bottom: 8),
+                      child: Material(
+                        color: isSelected
+                            ? AppColors.secondaryContainer.withOpacity(0.4)
+                            : Colors.transparent,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12),
+                          side: BorderSide(
+                            color: isSelected
+                                ? AppColors.primary
+                                : AppColors.outline.withOpacity(0.5),
+                            width: isSelected ? 1.5 : 1,
+                          ),
+                        ),
+                        child: ListTile(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          leading: CircleAvatar(
+                            backgroundColor: isSelected
+                                ? AppColors.primary
+                                : AppColors.surfaceContainer,
+                            foregroundColor: isSelected ? Colors.white : AppColors.primary,
+                            child: Icon(
+                              (details?['icon'] as IconData?) ?? Icons.cottage_outlined,
+                              size: 20,
+                            ),
+                          ),
+                          title: Text(
+                            flock,
+                            style: TextStyle(
+                              fontSize: 14,
+                              fontWeight: isSelected ? FontWeight.bold : FontWeight.w600,
+                              color: isSelected ? AppColors.primary : AppColors.textHeadline,
+                            ),
+                          ),
+                          subtitle: Text(
+                            '${details?['populasi'] ?? ''} • ${details?['desc'] ?? ''}',
+                            style: const TextStyle(fontSize: 11, color: AppColors.textMuted),
+                          ),
+                          trailing: isSelected
+                              ? const Icon(Icons.check_circle_rounded,
+                                  color: AppColors.primary, size: 22)
+                              : const Icon(Icons.radio_button_off_rounded,
+                                  color: AppColors.outline, size: 22),
+                          onTap: () {
+                            Navigator.pop(context);
+                            _selectFlock(flock);
+                          },
+                        ),
+                      ),
+                    );
+                  }),
+                ],
+              ),
+            ),
           ),
         );
       },
@@ -371,7 +540,7 @@ class _ProfilScreenState extends State<ProfilScreen> {
               const Divider(color: AppColors.outline),
               Row(
                 children: [
-                  Expanded(child: _buildProfileMetric('Kandang Aktif', widget.selectedFlock)),
+                  Expanded(child: _buildProfileMetric('Kandang Aktif', _currentFlock)),
                   Container(width: 1, height: 26, color: AppColors.outline),
                   Expanded(child: _buildProfileMetric('Strain Acuan', _selectedStrain)),
                   Container(width: 1, height: 26, color: AppColors.outline),
@@ -398,19 +567,50 @@ class _ProfilScreenState extends State<ProfilScreen> {
               ListTile(
                 leading: const Icon(Icons.cottage_outlined, color: AppColors.primary),
                 title: const Text('Kandang Terpilih', style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold)),
-                subtitle: Text(widget.selectedFlock, style: const TextStyle(fontSize: 11, color: AppColors.textMuted)),
+                subtitle: Text(_currentFlock, style: const TextStyle(fontSize: 11, color: AppColors.primary, fontWeight: FontWeight.w600)),
+                onTap: _showFlockSelectionModal,
                 trailing: PopupMenuButton<String>(
-                  initialValue: widget.selectedFlock,
-                  onSelected: widget.onFlockChanged,
+                  initialValue: _currentFlock,
+                  tooltip: 'Ganti Kandang',
+                  onSelected: _selectFlock,
                   itemBuilder: (context) => AppConstants.flocks
-                      .map((f) => PopupMenuItem(value: f, child: Text(f)))
+                      .map((f) => PopupMenuItem(
+                            value: f,
+                            child: Row(
+                              children: [
+                                Icon(
+                                  f == _currentFlock ? Icons.check_circle_rounded : Icons.radio_button_off_rounded,
+                                  size: 16,
+                                  color: f == _currentFlock ? AppColors.primary : AppColors.textMuted,
+                                ),
+                                const SizedBox(width: 8),
+                                Text(
+                                  f,
+                                  style: TextStyle(
+                                    fontSize: 13,
+                                    fontWeight: f == _currentFlock ? FontWeight.bold : FontWeight.normal,
+                                    color: f == _currentFlock ? AppColors.primary : AppColors.textHeadline,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ))
                       .toList(),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: const [
-                      Text('Ganti', style: TextStyle(fontSize: 11, fontWeight: FontWeight.bold, color: AppColors.primary)),
-                      Icon(Icons.arrow_drop_down, color: AppColors.primary),
-                    ],
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                    decoration: BoxDecoration(
+                      color: AppColors.secondaryContainer.withOpacity(0.5),
+                      borderRadius: BorderRadius.circular(8),
+                      border: Border.all(color: AppColors.primary.withOpacity(0.3)),
+                    ),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: const [
+                        Text('Ganti', style: TextStyle(fontSize: 11, fontWeight: FontWeight.bold, color: AppColors.primary)),
+                        SizedBox(width: 2),
+                        Icon(Icons.arrow_drop_down, color: AppColors.primary, size: 18),
+                      ],
+                    ),
                   ),
                 ),
               ),

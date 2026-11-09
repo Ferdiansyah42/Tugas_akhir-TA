@@ -29,5 +29,13 @@ void main() {
     await tester.tap(find.byKey(const Key('app_bar_profile_avatar')));
     await tester.pumpAndSettle();
     expect(find.text('Ferdiansyah'), findsOneWidget);
+
+    // Verifikasi ganti kandang ke Blok B di Profil
+    await tester.tap(find.text('Kandang Terpilih'));
+    await tester.pumpAndSettle();
+    expect(find.text('Pilih Kandang Aktif'), findsOneWidget);
+    await tester.tap(find.text('Kandang Blok B'));
+    await tester.pumpAndSettle();
+    expect(find.text('Kandang Blok B'), findsWidgets);
   });
 }
