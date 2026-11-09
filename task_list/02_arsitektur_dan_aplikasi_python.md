@@ -46,3 +46,4 @@ c:\TA-saya\
   - **Tab 3: Hasil Evaluasi** — Kartu komparasi Mamdani vs Sugeno, breakdown variabel, dan status potensi IP.
   - **Tab 4: Solusi / Rekomendasi** — Panduan tindakan korektif prioritas (Kipas/Blower, Tirai, Air Minum).
   - **Tab 5: Riwayat** — Daftar histori evaluasi tersimpan di SQLite.
+

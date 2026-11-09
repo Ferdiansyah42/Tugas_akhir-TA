@@ -109,9 +109,33 @@ def api_history():
     })
 
 
+@app.route("/api/benchmark", methods=["GET"])
+def api_benchmark():
+    """Endpoint API untuk mengambil hasil komparasi benchmark 50 skenario (Mamdani vs Sugeno)."""
+    import os
+    json_path = os.path.join(os.path.dirname(__file__), "data_skenario_uji_50.json")
+    if os.path.exists(json_path):
+        import json
+        with open(json_path, "r", encoding="utf-8") as f:
+            data = json.load(f)
+        return jsonify({
+            "status": "success",
+            "data": data
+        })
+    else:
+        # Jalankan benchmark jika file belum ada
+        from benchmark import run_benchmark
+        summary = run_benchmark()
+        return jsonify({
+            "status": "success",
+            "data": summary
+        })
+
+
 if __name__ == "__main__":
     print("=" * 60)
     print("FuzzyBroiler IP - Aplikasi SPK Fuzzy Broiler Berjalan (Python Flask)")
     print("Buka browser di: http://127.0.0.1:5000")
     print("=" * 60)
     app.run(host="127.0.0.1", port=5000, debug=True)
+

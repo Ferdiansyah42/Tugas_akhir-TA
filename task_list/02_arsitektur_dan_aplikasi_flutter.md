@@ -1,101 +1,46 @@
-# Task List 02: Arsitektur Sistem & Aplikasi Mobile Flutter
+# Task List 02: Arsitektur Sistem & Aplikasi Mobile Flutter (Offline-First)
 
-Dokumen ini memuat daftar tugas untuk perancangan arsitektur perangkat lunak dan implementasi aplikasi Android menggunakan Flutter berbasis prinsip offline-first.
+Dokumen ini memuat daftar tugas dan spesifikasi implementasi sistem pendukung keputusan (SPK) berbasis **Flutter (Android/Dart)** dengan tampilan antarmuka *FuzzyBroiler IP* yang berjalan 100% offline di perangkat seluler sesuai ketetapan **Blueprint Tugas Akhir**.
 
 ---
 
-## 🏗️ Struktur Modul yang Ditetapkan Blueprint
+## 🏗️ Struktur Arsitektur Modul Flutter (`flutter_app/lib/`)
 
 ```
-lib/
-├── fuzzy/          # Mesin fuzzy (pure Dart tanpa dependensi UI)
-│   ├── membership/ # Fungsi kurva keanggotaan (segitiga, trapesium)
-│   ├── rules/      # 27 basis aturan fuzzy & penyesuaian umur
-│   ├── inference/  # Engine Mamdani (centroid) & Sugeno (weighted average)
-│   └── target_temp/# Fungsi kalkulator suhu target adaptif strain broiler
-├── data/           # Layer persistensi lokal SQLite
-│   ├── database/   # Helper SQLite (sqflite, migrasi tabel)
-│   ├── models/     # Model evaluasi kandang & mapping DTO
-│   └── repository/ # Query CRUD riwayat evaluasi
-├── service/        # Logika bisnis dan analitik keputusan
-│   ├── recommendation/ # Algoritma rekomendasi tindakan prioritas
-│   └── early_warning/  # Deteksi penurunan performa berturut-turut
-└── ui/             # 5 Layar antarmuka pengguna
-    ├── screens/
-    │   ├── home/           # Beranda ringkasan & peringatan dini
-    │   ├── input/          # Form input umur, suhu, kelembaban
-    │   ├── result/         # Visualisasi skor 0–100 & status variabel
-    │   ├── recommendation/ # Panduan tindakan korektif hierarkis
-    │   └── history/        # Riwayat tabel & grafik tren (FL Chart)
-    └── widgets/            # Komponen UI reusable (gauge, cards, badges)
+flutter_app/lib/
+├── fuzzy/
+│   └── fuzzy_engine.dart       # Mesin inferensi Fuzzy murni Dart (Mamdani Centroid & Sugeno Weighted Avg)
+└── main.dart                   # Antarmuka Flutter lengkap: Top AppBar, 5 Screen Views, & Bottom Navigation Bar
 ```
 
 ---
 
-## 📋 Daftar Tugas Utama
+## 📋 Status Implementasi Modul Flutter
 
-- [ ] **Task 2.1: Modul Mesin Fuzzy Pure Dart (`lib/fuzzy/`)**
-  - Membuat class representasi fungsi keanggotaan (`TriangularMF`, `TrapezoidalMF`).
-  - Mengimplementasikan penghitung deviasi suhu adaptif:
-    $$\Delta T = T_{aktual} - \text{TargetTemp}(umur)$$
-  - Mengimplementasikan mesin inferensi Mamdani:
-    - Fuzzifikasi 3 variabel input.
-    - Evaluasi firing strength 27 rule ($\alpha$-predicate).
-    - Agregasi komposisi aturan (Max).
-    - Defuzzifikasi diskrit Centroid numerik.
-  - Mengimplementasikan mesin inferensi Sugeno:
-    - Evaluasi konsekuen konstanta ($z_i$).
-    - Defuzzifikasi rata-rata berbobot ($\sum w_i z_i / \sum w_i$).
-  - Membuat Unit Test lengkap di `test/fuzzy_test.dart` untuk memastikan tidak ada eror matematis.
+- [x] **Task 2.1: Modul Mesin Fuzzy Pure Dart (`lib/fuzzy/fuzzy_engine.dart`)**
+  - Implementasi fungsi kurva keanggotaan trapesium dan segitiga tanpa ketergantungan UI (*zero-dependency pure Dart*).
+  - Perhitungan deviasi suhu adaptif $\Delta T = T_{\text{aktual}} - T_{\text{target}}(Umur)$ berbasis pedoman strain broiler komersial (Cobb 500 / Ross 308).
+  - Implementasi 27 aturan If-Then lengkap dengan penyesuaian kepekaan biologis (Starter peka kedinginan, Finisher peka kepanasan).
+  - Implementasi defuzzifikasi **Mamdani (Centroid / COG)** dan **Sugeno Zero-Order (Weighted Average)**.
+  - Penentuan kategori skor potensi performa, status variabel mikroklimat, dan deteksi tren peringatan dini.
 
-- [ ] **Task 2.2: Modul Basis Data SQLite (`lib/data/`)**
-  - Menyiapkan paket `sqflite` dan `path`.
-  - Membuat skema tabel `evaluasi`:
-    ```sql
-    CREATE TABLE evaluasi (
-      id TEXT PRIMARY KEY,
-      tanggal TEXT NOT NULL,
-      umur INTEGER NOT NULL,
-      suhu REAL NOT NULL,
-      kelembaban REAL NOT NULL,
-      skor REAL NOT NULL,
-      kategori TEXT NOT NULL,
-      synced INTEGER DEFAULT 0
-    );
-    ```
-  - Menyediakan fungsi CRUD (Insert hasil evaluasi, Get history terurut tanggal, Delete, Get statistik 7 hari terakhir).
-
-- [ ] **Task 2.3: Modul Servis Rekomendasi & Peringatan Dini (`lib/service/`)**
-  - **Engine Rekomendasi Bertingkat (Prioritas Tindakan)**:
-    - Jika Panas & Lembab Tinggi $\rightarrow$ Prioritas: Kipas/Blower maksimal, buka ventilasi atas, periksa pendingin evaporatif/cooling pad, pastikan debit air minum dingin lancar.
-    - Jika Dingin & Lembab Tinggi $\rightarrow$ Prioritas: Tutup tirai, kurangi kelembaban melalui sirkulasi udara berkala tanpa memicu *wind chill*, nyalakan pemanas (brooder heater).
-    - Jika Lembab Rendah (Kering/Berdebu) $\rightarrow$ Semprot kabut air / misting, atur ventilasi agar sekam tidak berdebu.
-  - **Sistem Peringatan Dini (Early Warning System)**:
-    - Membaca tren data 3 hari berturut-turut dari SQLite.
-    - Jika skor performa menunjukkan penurunan terus-menerus selama 3 evaluasi berturut-turut, trigger *alert banner* di Beranda: `"Peringatan: Tren kondisi kandang menurun selama 3 hari berturut-turut! Lakukan tindakan korektif."`
-
-- [ ] **Task 2.4: Implementasi 5 Layar UI Flutter (`lib/ui/`)**
-  - **Layar 1: Beranda**
-    - Kartu skor evaluasi terakhir dengan indikator warna (Hijau: Tinggi, Kuning: Sedang, Merah: Rendah).
-    - Status ringkas kondisi mikroklimat kandang (Suhu, Kelembaban, Umur).
-    - Banner Peringatan Dini jika kondisi memburuk 3 hari terakhir.
-    - Tombol cepat untuk memulai evaluasi baru.
-  - **Layar 2: Form Input Evaluasi**
-    - Input angka: Umur ayam (hari), Suhu kandang (°C), Kelembaban relatif (%).
-    - Deteksi otomatis fase pemeliharaan secara real-time saat umur diinput (Starter: 0–14 hari, Grower: 15–28 hari, Finisher: 29–42 hari).
-    - Tampilan suhu target strain acuan sebagai panduan peternak di bawah kolom input suhu.
+- [x] **Task 2.2: Antarmuka Flutter Lengkap 5 Layar (`lib/main.dart`)**
+  - **Layar 1: Beranda (Home Dashboard)**
+    - *Top App Bar*: Logo FuzzyBroiler IP, badge DSS, pill status Offline, avatar pengguna, dan sub-header "Kandang Blok A (Hari ke-21) - Siap Pakai Tanpa Kuota".
+    - *Early Warning Alert Banner*: Peringatan dini interaktif berwarna amber ("Perhatian untuk Kandang Blok B: Suhu agak sedikit naik dalam 2 hari ini...") dengan tombol aksi "Lihat Cara Penanganan" dan "Nanti Saja".
+    - *Hero Score Card*: Status "KONDISI BAIK SEKALI", skor kesehatan **86 / 100**, progress bar hijau emerald, dan label "Prediksi Panen: Sangat Memuaskan (Aman & Nyaman)".
+    - *Micro-Climate 3-Card Telemetri*: Umur 21 Hari (Grower), Suhu Ruangan 28.8°C (Target 27°C, Agak Hangat, Masih Aman), Kelembaban 68% (Pas & Nyaman).
+    - *Priority Actionable Widget*: Kartu hijau tua dengan rekomendasi pembukaan tirai 30% dan kipas blower nomor 2.
+    - *Info Siklus Kandang Aktif*: Closed House 01 (Cobb 500, populasi 10.000 ekor, panen 21 hari lagi).
+    - *Tombol Floating CTA*: "➕ Cek Kondisi Kandang Hari Ini".
+  - **Layar 2: Input Evaluasi**
+    - Form interaktif dengan deteksi otomatis fase umur (*Starter / Grower / Finisher*) dan pratinjau target temperatur strain secara *real-time*.
+    - Tombol "Jalankan Inferensi Fuzzy" yang mengevaluasi parameter baru secara offline.
   - **Layar 3: Hasil Evaluasi**
-    - Indikator skor numerik (0–100) menggunakan circular gauge / progress bar elegan.
-    - Label kategori potensi performa: *Tinggi*, *Sedang*, atau *Rendah*.
-    - Rincian status masing-masing variabel: Status Suhu (Dingin / Nyaman / Panas), Status RH (Rendah / Ideal / Tinggi).
-    - Tombol navigasi menuju *Lihat Rekomendasi Tindakan*.
-  - **Layar 4: Rekomendasi Tindakan Korektif**
-    - Daftar saran langkah perbaikan yang diurutkan berdasarkan skala urgensi:
-      1. Penanganan Tirai Kandang (buka/tutup sebagian/penuh).
-      2. Pengaturan Ventilasi & Exhaust Fan (tingkatkan/kurangi kecepatan airflow).
-      3. Penyesuaian Pemanas / Cooling Pad.
-      4. Ketersediaan & Suhu Air Minum.
-  - **Layar 5: Riwayat & Grafik Tren**
-    - Grafik garis interaktif (menggunakan `fl_chart`) yang memperlihatkan histori skor potensi performa sepanjang hari pemeliharaan.
-    - Daftar list riwayat log dengan timestamp, nilai parameter input, dan skor.
-
+    - Kartu komparasi berdampingan: Skor Mamdani (Centroid) vs Skor Sugeno (Weighted Average).
+    - Rincian parameter status dan estimasi Indeks Performa (IP).
+  - **Layar 4: Rekomendasi Solusi Tindakan**
+    - Daftar langkah korektif berurutan prioritas: pengaturan kipas/blower, bukaan tirai, dan manajemen air minum dingin.
+  - **Layar 5: Riwayat Evaluasi**
+    - Riwayat evaluasi tersimpan secara kronologis dengan indikator warna kategori.
+  - **Bottom Navigation Bar (5 Tab)**: Beranda, Input, Hasil, Solusi, dan Riwayat.

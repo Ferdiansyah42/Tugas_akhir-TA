@@ -217,3 +217,4 @@ if __name__ == "__main__":
     init_db()
     latest = get_latest_evaluation()
     print("Database terinisialisasi. Data evaluasi terbaru:", latest["flock_name"], latest["age"], "hari, skor:", latest["score_mamdani"])
+

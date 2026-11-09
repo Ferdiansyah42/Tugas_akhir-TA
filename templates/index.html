@@ -543,6 +543,32 @@
             </div>
           </div>
 
+          <!-- Benchmark & Scientific Verification Card (Bab 4 TA) -->
+          <div class="rounded-xl bg-surface-container-low p-space-md border border-secondary-container flex flex-col gap-space-xs mt-2">
+            <div class="flex items-center justify-between">
+              <span class="font-label-sm text-label-sm font-bold text-primary uppercase flex items-center gap-1">
+                <span class="material-symbols-outlined text-[16px]">science</span>
+                Benchmark Komparasi (Bab 4 TA)
+              </span>
+              <span class="font-label-sm text-label-sm bg-primary/10 text-primary px-2 py-0.5 rounded-full font-semibold">50 Skenario Uji</span>
+            </div>
+            <div class="grid grid-cols-2 gap-2 mt-1">
+              <div class="bg-surface-container-lowest p-2 rounded-lg">
+                <span class="text-on-surface-variant font-label-sm text-label-sm block">Latensi Sugeno:</span>
+                <strong class="text-primary font-metric-lg text-[18px]">0.005 ms</strong>
+                <span class="text-[10px] text-tertiary block font-semibold">92.5x Lebih Cepat</span>
+              </div>
+              <div class="bg-surface-container-lowest p-2 rounded-lg">
+                <span class="text-on-surface-variant font-label-sm text-label-sm block">Korelasi Pearson (r):</span>
+                <strong class="text-primary font-metric-lg text-[18px]">0.9987</strong>
+                <span class="text-[10px] text-tertiary block font-semibold">Kesesuaian 98.0%</span>
+              </div>
+            </div>
+            <p class="text-[11px] text-on-surface-variant mt-1 leading-tight">
+              Mamdani unggul pada kejelasan linguistik, sedangkan Sugeno unggul dalam efisiensi komputasi perangkat mobile. MAE antar-metode: <strong>3.88 poin</strong>.
+            </p>
+          </div>
+
           <button onclick="switchTab('solusi')" class="w-full py-3 rounded-lg bg-primary text-white font-label-md text-label-md font-semibold flex items-center justify-center gap-1 shadow-xs hover:bg-primary-container">
             <span>Lihat Panduan Solusi Korektif</span>
             <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
@@ -842,3 +868,4 @@
   </script>
 </body>
 </html>
+

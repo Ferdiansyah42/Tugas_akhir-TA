@@ -1,0 +1,51 @@
+no,fase,umur,suhu_aktual,suhu_target,deviasi_suhu,kelembaban,skor_mamdani,skor_sugeno,selisih_skor,kategori_mamdani,kategori_sugeno,waktu_mamdani_ms,waktu_sugeno_ms,deskripsi
+1,Starter,1,33.0,33.0,0.0,65.0,88.1,88.0,0.1,Tinggi,Tinggi,0.6933,0.0082,DOC Hari 1 Optimal Brooding
+2,Starter,2,33.2,33.0,0.2,60.0,88.1,88.0,0.1,Tinggi,Tinggi,0.7099,0.0051,DOC Hari 2 Nyaman & Stabil
+3,Starter,3,28.0,33.0,-5.0,65.0,20.7,30.0,9.3,Rendah,Rendah,0.616,0.0048,DOC Hari 3 Kedinginan Moderat (-5°C dev)
+4,Starter,4,25.0,31.5,-6.5,80.0,20.7,30.0,9.3,Rendah,Rendah,0.3275,0.003,DOC Hari 4 Kedinginan Ekstrem + Lembab Basah
+5,Starter,5,31.5,31.5,0.0,62.0,88.1,88.0,0.1,Tinggi,Tinggi,0.3769,0.0029,Starter Hari 5 Sesuai Target
+6,Starter,7,36.0,31.5,4.5,50.0,61.7,65.0,3.3,Sedang,Sedang,0.3927,0.0075,Starter Hari 7 Overheating Kering
+7,Starter,7,36.5,31.5,5.0,82.0,20.7,30.0,9.3,Rendah,Rendah,0.6484,0.003,Starter Hari 7 Overheating Lembab Pengap
+8,Starter,8,29.0,29.0,0.0,65.0,88.1,88.0,0.1,Tinggi,Tinggi,0.4953,0.005,Starter Hari 8 Target Pas 29°C
+9,Starter,9,29.2,29.0,0.2,68.0,88.1,88.0,0.1,Tinggi,Tinggi,0.8942,0.0155,Starter Hari 9 Nyaman & Normal
+10,Starter,10,24.0,29.0,-5.0,70.0,20.7,30.0,9.3,Rendah,Rendah,0.5102,0.0073,Starter Hari 10 Kedinginan Pemanas Kurang
+11,Starter,11,29.0,29.0,0.0,42.0,61.6,65.0,3.4,Sedang,Sedang,0.7282,0.0079,Starter Hari 11 Suhu Pas tapi Terlalu Kering
+12,Starter,12,29.0,29.0,0.0,85.0,61.3,65.0,3.7,Sedang,Sedang,0.3383,0.003,Starter Hari 12 Suhu Pas tapi Sekam Basah
+13,Starter,13,33.0,29.0,4.0,65.0,50.4,57.4,7.0,Sedang,Sedang,0.7656,0.0085,Starter Hari 13 Agak Hangat (+4°C dev)
+14,Starter,14,28.8,29.0,-0.2,63.0,85.6,88.0,2.4,Tinggi,Tinggi,0.7555,0.0079,Transisi Starter-Grower Ideal
+15,Starter,14,23.5,29.0,-5.5,85.0,24.1,30.0,5.9,Rendah,Rendah,0.6007,0.0032,Transisi Starter Kritis Dingin Basah
+16,Starter,14,34.0,29.0,5.0,55.0,60.5,65.0,4.5,Sedang,Sedang,0.4556,0.0054,Transisi Starter Kritis Panas
+17,Grower,15,27.0,27.0,0.0,65.0,86.0,88.0,2.0,Tinggi,Tinggi,0.3328,0.0029,Grower Hari 15 Optimal
+18,Grower,16,26.8,27.0,-0.2,62.0,86.4,88.0,1.6,Tinggi,Tinggi,1.0279,0.008,Grower Hari 16 Kondisi Prima
+19,Grower,17,22.0,27.0,-5.0,65.0,61.2,65.0,3.8,Sedang,Sedang,0.7106,0.014,Grower Hari 17 Terlalu Dingin (-5°C dev)
+20,Grower,18,32.0,27.0,5.0,75.0,22.8,30.0,7.2,Rendah,Rendah,0.729,0.008,Grower Hari 18 Panas & Lembab Tinggi
+21,Grower,19,27.2,27.0,0.2,65.0,87.4,88.0,0.6,Tinggi,Tinggi,0.7478,0.0078,Grower Hari 19 (Data Histori Blok A)
+22,Grower,20,28.0,27.0,1.0,66.5,87.8,88.0,0.2,Tinggi,Tinggi,0.591,0.0029,Grower Hari 20 (Data Histori Blok A)
+23,Grower,21,27.0,27.0,0.0,65.0,88.1,88.0,0.1,Tinggi,Tinggi,0.3607,0.003,Grower Hari 21 Tepat di Target 27°C
+24,Grower,21,28.8,27.0,1.8,68.0,70.4,79.3,8.9,Sedang,Tinggi,0.4233,0.0056,Grower Hari 21 (Data Mockup Blok A)
+25,Grower,22,24.5,24.5,0.0,65.0,87.8,88.0,0.2,Tinggi,Tinggi,0.3431,0.0048,Grower Hari 22 Target Pas 24.5°C
+26,Grower,23,24.0,24.5,-0.5,63.0,87.4,88.0,0.6,Tinggi,Tinggi,0.3328,0.0029,Grower Hari 23 Nyaman & Stabil
+27,Grower,24,20.0,24.5,-4.5,70.0,61.4,65.0,3.6,Sedang,Sedang,0.442,0.0108,Grower Hari 24 Dingin Tirai Terbuka
+28,Grower,25,29.5,24.5,5.0,65.0,22.6,30.0,7.4,Rendah,Rendah,0.3646,0.0033,Grower Hari 25 Agak Hangat (+5°C dev)
+29,Grower,26,24.5,24.5,0.0,45.0,61.0,65.0,4.0,Sedang,Sedang,0.3531,0.0078,Grower Hari 26 Terlalu Kering Berdebu
+30,Grower,27,24.5,24.5,0.0,88.0,60.8,65.0,4.2,Sedang,Sedang,0.5019,0.0029,Grower Hari 27 Sekam Becek Amonia
+31,Grower,28,24.0,24.5,-0.5,65.0,85.6,88.0,2.4,Tinggi,Tinggi,0.5413,0.009,Akhir Grower Optimal
+32,Grower,28,31.0,24.5,6.5,78.0,24.1,30.0,5.9,Rendah,Rendah,0.4861,0.0032,Akhir Grower Stres Panas Ringan
+33,Grower,28,19.0,24.5,-5.5,60.0,60.5,65.0,4.5,Sedang,Sedang,0.4508,0.0033,Akhir Grower Terlalu Sejuk
+34,Finisher,29,22.5,22.5,0.0,65.0,86.2,88.0,1.8,Tinggi,Tinggi,0.4293,0.0056,Finisher Hari 29 Target Pas 22.5°C
+35,Finisher,30,22.0,22.5,-0.5,60.0,86.9,88.0,1.1,Tinggi,Tinggi,0.3681,0.0029,Finisher Hari 30 Nyaman
+36,Finisher,31,27.5,22.5,5.0,68.0,21.5,30.0,8.5,Rendah,Rendah,0.533,0.0048,Finisher Hari 31 Stres Panas Moderat (+5°C dev)
+37,Finisher,32,29.0,22.5,6.5,75.0,22.8,30.0,7.2,Rendah,Rendah,0.4379,0.0072,Finisher Hari 32 Stres Panas Tinggi Rawan Panting
+38,Finisher,33,31.5,22.5,9.0,82.0,20.7,30.0,9.3,Rendah,Rendah,0.5487,0.0029,Finisher Hari 33 Bahaya Fatal Heat Stress Lembab
+39,Finisher,34,22.5,22.5,0.0,65.0,88.1,88.0,0.1,Tinggi,Tinggi,0.3345,0.003,Finisher Hari 34 Kondisi Terjaga
+40,Finisher,35,18.0,22.5,-4.5,65.0,61.7,65.0,3.3,Sedang,Sedang,0.331,0.003,Finisher Hari 35 Agak Sejuk (-4.5°C dev)
+41,Finisher,36,21.0,21.0,0.0,65.0,88.1,88.0,0.1,Tinggi,Tinggi,0.6333,0.0079,Finisher Hari 36 Target Pas 21°C
+42,Finisher,37,20.5,21.0,-0.5,62.0,88.1,88.0,0.1,Tinggi,Tinggi,0.3461,0.0029,Finisher Hari 37 Sejuk & Segar
+43,Finisher,38,26.5,21.0,5.5,70.0,20.7,30.0,9.3,Rendah,Rendah,0.401,0.0071,Finisher Hari 38 Peningkatan Suhu Siang Hari
+44,Finisher,39,21.0,21.0,0.0,48.0,61.7,65.0,3.3,Sedang,Sedang,0.3437,0.0029,Finisher Hari 39 Kering
+45,Finisher,40,21.0,21.0,0.0,85.0,61.7,65.0,3.3,Sedang,Sedang,0.3264,0.0029,Finisher Hari 40 Lembab Padat Menjelang Panen
+46,Finisher,41,21.0,21.0,0.0,65.0,88.1,88.0,0.1,Tinggi,Tinggi,0.3447,0.0029,Finisher Hari 41 Kondisi Ideal Pra-Panen
+47,Finisher,42,21.0,21.0,0.0,65.0,88.1,88.0,0.1,Tinggi,Tinggi,0.3409,0.003,Finisher Hari 42 Siap Panen Skor Maksimal
+48,Finisher,42,28.5,21.0,7.5,80.0,20.7,30.0,9.3,Rendah,Rendah,0.3495,0.0048,Finisher Hari 42 Bahaya Kematian Jelang Panen
+49,Finisher,42,17.5,21.0,-3.5,65.0,61.7,65.0,3.3,Sedang,Sedang,0.3513,0.0029,Finisher Hari 42 Sejuk Dingin
+50,Finisher,42,24.0,21.0,3.0,65.0,21.2,30.0,8.8,Rendah,Rendah,0.3287,0.0029,Finisher Hari 42 Agak Hangat Normal

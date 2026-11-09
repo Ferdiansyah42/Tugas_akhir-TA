@@ -132,3 +132,4 @@ Untuk keperluan pengujian Bab 4 dan validasi oleh 2–3 pakar peternakan, disiap
    - Kasus di sekitar batas transisi umur (hari ke-13 s.d. 15, hari ke-27 s.d. 29).
    - Kasus di batas deviasi suhu ($\pm 2.0^\circ\text{C}$) dan kelembaban ($55\%$ dan $75\%$).
    - $\rightarrow$ Membuktikan keunggulan logika fuzzy dalam menghasilkan transisi nilai yang kontinu (*smooth transition*), tidak kaku seperti sistem aturan tegas (*crisp if-else*).
+
