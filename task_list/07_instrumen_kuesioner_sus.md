@@ -61,3 +61,4 @@ Formula baku perhitungan skor SUS menurut John Brooke (1996):
 * **Skor $< 51.0$** : Kategori **Grade F (Not Acceptable / Gagal)**.
 
 *(Berdasarkan target Blueprint Halaman 5, target skor rata-rata SUS aplikasi FuzzyBroiler IP adalah $> 75.0$ atau kategori Good/Excellent).*
+

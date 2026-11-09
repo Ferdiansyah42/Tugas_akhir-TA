@@ -42,19 +42,26 @@ Dokumen ini merupakan panduan kerja terstruktur (*work breakdown structure*) yan
 
 ---
 
-## 📂 Struktur Dokumen Task List
+## 📂 Struktur Dokumen Proyek & Naskah TA
 
-Detail rincian tugas untuk setiap bidang dapat dilihat pada berkas berikut:
+### A. Rincian Perencanaan & Instrumen Pengujian (`task_list/`)
+1. [**01_model_fuzzy.md**](file:///c:/TA-saya/task_list/01_model_fuzzy.md) — Rincian perancangan 27 aturan, fungsi keanggotaan, dan formulasi Mamdani/Sugeno.
+2. [**02_arsitektur_dan_aplikasi_flutter.md**](file:///c:/TA-saya/task_list/02_arsitektur_dan_aplikasi_flutter.md) — Arsitektur Flutter offline-first, modularisasi Dart murni, dan 5 layar interaktif.
+3. [**03_pengujian_dan_validasi_pakar.md**](file:///c:/TA-saya/task_list/03_pengujian_dan_validasi_pakar.md) — Metrik evaluasi empiris, latensi komputasi, dan MAE.
+4. [**04_penulisan_laporan_ta.md**](file:///c:/TA-saya/task_list/04_penulisan_laporan_ta.md) — Struktur dan status penulisan buku TA Bab 1 s.d. Bab 5.
+5. [**05_spesifikasi_detail_27_aturan_dan_strain.md**](file:///c:/TA-saya/task_list/05_spesifikasi_detail_27_aturan_dan_strain.md) — Matriks 27 aturan biologis dan kurva acuan strain Cobb 500/Ross 308.
+6. [**06_instrumen_kuesioner_validasi_pakar.md**](file:///c:/TA-saya/task_list/06_instrumen_kuesioner_validasi_pakar.md) — Lembar instrumen validasi pakar untuk 30 skenario mikroklimat.
+7. [**07_instrumen_kuesioner_sus.md**](file:///c:/TA-saya/task_list/07_instrumen_kuesioner_sus.md) — Lembar pengujian kegunaan *System Usability Scale* (10 butir Likert).
+8. [**08_arsitektur_modular_class_flutter.md**](file:///c:/TA-saya/task_list/08_arsitektur_modular_class_flutter.md) — Rincian modularisasi class arsitektur Flutter (`core/`, `widgets/`, `screens/`).
 
-1. [**01_model_fuzzy.md**](file:///c:/TA-saya/task_list/01_model_fuzzy.md)  
-   Rincian perancangan fungsi keanggotaan, 27 aturan, logika deviasi suhu adaptif, serta formulasi Mamdani dan Sugeno.
+### B. Naskah Buku Laporan Tugas Akhir (`laporan_ta/`)
+* [**ABSTRAK.md**](file:///c:/TA-saya/laporan_ta/ABSTRAK.md) — Abstrak dwibahasa (Bahasa Indonesia & English).
+* [**BAB 1: PENDAHULUAN**](file:///c:/TA-saya/laporan_ta/BAB_1_PENDAHULUAN.md) — Latar belakang, rumusan masalah, batasan, tujuan, manfaat.
+* [**BAB 2: TINJAUAN PUSTAKA**](file:///c:/TA-saya/laporan_ta/BAB_2_TINJAUAN_PUSTAKA.md) — Mikroklimat, Indeks Performa (IP), logika fuzzy, sintesis riset terdahulu.
+* [**BAB 3: METODOLOGI PENELITIAN**](file:///c:/TA-saya/laporan_ta/BAB_3_METODOLOGI_PENELITIAN.md) — Alur penelitian, pemodelan matematis, modularisasi arsitektur Flutter.
+* [**BAB 4: HASIL DAN PEMBAHASAN**](file:///c:/TA-saya/laporan_ta/BAB_4_HASIL_DAN_PEMBAHASAN.md) — Hasil implementasi, benchmark 50 skenario (Sugeno 92.5x lebih cepat, korelasi 0.9987), uji black-box.
+* [**BAB 5: KESIMPULAN DAN SARAN**](file:///c:/TA-saya/laporan_ta/BAB_5_PENUTUP.md) — Kesimpulan akademis dan rekomendasi integrasi IoT/ANFIS.
 
-2. [**02_arsitektur_dan_aplikasi_python.md**](file:///c:/TA-saya/task_list/02_arsitektur_dan_aplikasi_python.md)  
-   Rincian teknis modul Python murni (`fuzzy_engine.py`), database SQLite (`database.py`), arsitektur web mobile Flask 5 layar (`app.py`), dan sistem peringatan dini.
-
-3. [**03_pengujian_dan_validasi_pakar.md**](file:///c:/TA-saya/task_list/03_pengujian_dan_validasi_pakar.md)  
-   Rincian pembuatan skenario data uji, protokol wawancara pakar, metrik statistik (MAE, Kappa), uji performa komputasi, dan SUS.
-
-4. [**04_penulisan_laporan_ta.md**](file:///c:/TA-saya/task_list/04_penulisan_laporan_ta.md)  
-   Rincian isi dan sistematika penulisan laporan ilmiah Bab 1 sampai Bab 5.
+### C. Panduan Penggunaan & Demo Sidang
+* [**PANDUAN_PENGGUNAAN_APLIKASI.md**](file:///c:/TA-saya/PANDUAN_PENGGUNAAN_APLIKASI.md) — Petunjuk langkah-demi-langkah pengoperasian aplikasi, skenario demo sidang penguji, dan build APK Android.
 
