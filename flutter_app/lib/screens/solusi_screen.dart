@@ -144,6 +144,34 @@ class SolusiScreen extends StatelessWidget {
         ),
         const SizedBox(height: 14),
 
+        // Banner Keberhasilan Penerapan SOP
+        if (totalActions > 0 && doneActions == totalActions)
+          Container(
+            margin: const EdgeInsets.only(bottom: 14),
+            padding: const EdgeInsets.all(12),
+            decoration: BoxDecoration(
+              color: const Color(0xFFE8F5E9),
+              borderRadius: BorderRadius.circular(12),
+              border: Border.all(color: AppColors.emeraldGreen.withOpacity(0.4)),
+            ),
+            child: Row(
+              children: const [
+                Text('🎉', style: TextStyle(fontSize: 22)),
+                SizedBox(width: 10),
+                Expanded(
+                  child: Text(
+                    'Hebat! Semua langkah SOP mitigasi telah Anda terapkan di kandang. Pantau mikroklimat kembali dalam 15–30 menit.',
+                    style: TextStyle(
+                      fontSize: 12,
+                      fontWeight: FontWeight.bold,
+                      color: AppColors.emeraldText,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+
         // Action Steps Interactive Checklist
         ...currentEvaluation.recommendationDetails.map((item) {
           final isDone = completedActions[item.title] ?? false;

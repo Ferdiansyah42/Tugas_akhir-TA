@@ -71,11 +71,11 @@ flutter_app/lib/
 ---
 
 ### C. Lapisan Layar (`lib/screens/`)
-1. **`BerandaScreen`**: Mengorkestrasi seluruh komponen dashboard utama.
-2. **`InputScreen`**: Form interaktif dengan slider responsif untuk umur (1–42 hari), suhu (18–38°C), dan kelembaban (30–95%).
-3. **`HasilScreen`**: Menampilkan skor Mamdani (Centroid) vs Sugeno (Weighted Average), tabel parameter biologis, estimasi Indeks Performa (IP), FCR, dan latensi komputasi.
-4. **`SolusiScreen`**: Checklist interaktif mitigasi kandang dengan bilah kemajuan progres penyelesaian (0–100%) dan dialog bantuan teknis.
-5. **`RiwayatScreen`**: Tampilan historis evaluasi harian dengan filter kategori (Semua, Tinggi, Sedang, Rendah) dan fitur reset data.
+1. **`BerandaScreen`**: Mengorkestrasi seluruh komponen dashboard utama dengan indikator status dinamis (*Terpantau Baik / Perlu Dicek / Kritis*) dan tombol CTA terarah.
+2. **`InputScreen`**: Form interaktif dengan tombol presisi steper `[-]` dan `[+]` serta slider untuk umur (1–42 hari), suhu (18–38°C), dan kelembaban (30–95%), memudahkan input peternak di lapangan.
+3. **`HasilScreen`**: Menampilkan kartu penjelasan bahasa awam praktis untuk peternak, spektrum visual tolok ukur IP industri (<300 s.d. >400), komparasi Mamdani (Centroid) vs Sugeno (Weighted Average), tabel parameter biologis, estimasi IP, FCR, dan latensi komputasi.
+4. **`SolusiScreen`**: Checklist interaktif mitigasi kandang dengan bilah kemajuan progres penyelesaian (0–100%), banner konfirmasi penyelesaian SOP mikroklimat, dan dialog bantuan teknis hotline dokter hewan.
+5. **`RiwayatScreen`**: Tampilan historis evaluasi harian dengan kartu ringkasan KPI statistik (rata-rata skor, total hari, status terkini), filter kategori, dan grafik garis tren.
 6. **`ProfilScreen`**: Pengelolaan identitas peternak, data kemitraan, pilihan strain ayam acuan (Cobb 500, Ross 308, Hubbard), konfigurasi mesin inferensi default (Mamdani vs Sugeno), notifikasi peringatan dini, alarm ekstrem, ekspor riwayat (CSV/JSON), dan panduan ujian sidang.
 
 ---

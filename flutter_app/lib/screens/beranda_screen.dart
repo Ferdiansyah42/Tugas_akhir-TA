@@ -33,6 +33,12 @@ class BerandaScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isGood = currentEvaluation.scoreMamdani >= 75;
+    final isMed = currentEvaluation.scoreMamdani >= 50;
+    final statusLabel = isGood ? 'Terpantau Baik' : (isMed ? 'Perlu Dicek' : 'Kritis / Waspada');
+    final statusColor = isGood ? AppColors.emeraldGreen : (isMed ? AppColors.warningButton : AppColors.error);
+    final statusIcon = isGood ? Icons.check_circle : (isMed ? Icons.warning_amber_rounded : Icons.error_outline);
+
     return ListView(
       padding: const EdgeInsets.all(16),
       children: [
@@ -71,15 +77,15 @@ class BerandaScreen extends StatelessWidget {
               ),
             ),
             Row(
-              children: const [
-                Icon(Icons.check_circle, size: 14, color: AppColors.tertiary),
-                SizedBox(width: 4),
+              children: [
+                Icon(statusIcon, size: 14, color: statusColor),
+                const SizedBox(width: 4),
                 Text(
-                  'Terpantau Bagus',
+                  statusLabel,
                   style: TextStyle(
                     fontSize: 11,
                     fontWeight: FontWeight.bold,
-                    color: AppColors.tertiary,
+                    color: statusColor,
                   ),
                 ),
               ],
@@ -153,25 +159,20 @@ class BerandaScreen extends StatelessWidget {
         const SizedBox(height: 16),
 
         // 9. Floating CTA Button
-        ElevatedButton(
+        ElevatedButton.icon(
           onPressed: onNavigateToInput,
           style: ElevatedButton.styleFrom(
             backgroundColor: AppColors.primary,
             foregroundColor: Colors.white,
-            padding: const EdgeInsets.symmetric(vertical: 16),
+            padding: const EdgeInsets.symmetric(vertical: 15),
             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
-            elevation: 2,
+            elevation: 3,
+            shadowColor: AppColors.primary.withOpacity(0.35),
           ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: const [
-              Icon(Icons.add_circle, size: 24),
-              SizedBox(width: 8),
-              Text(
-                '➕ Cek Kondisi Kandang Hari Ini',
-                style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
-              ),
-            ],
+          icon: const Icon(Icons.tune_rounded, size: 20),
+          label: const Text(
+            'Ukur & Evaluasi Kondisi Hari Ini',
+            style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
           ),
         ),
         const SizedBox(height: 6),

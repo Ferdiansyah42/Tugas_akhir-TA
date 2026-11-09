@@ -94,10 +94,14 @@ class TelemetryCard extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(
-                  subText,
-                  style: const TextStyle(fontSize: 11, color: AppColors.textMuted),
+                Expanded(
+                  child: Text(
+                    subText,
+                    overflow: TextOverflow.ellipsis,
+                    style: const TextStyle(fontSize: 11, color: AppColors.textMuted),
+                  ),
                 ),
+                const SizedBox(width: 6),
                 Container(
                   padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
                   decoration: BoxDecoration(

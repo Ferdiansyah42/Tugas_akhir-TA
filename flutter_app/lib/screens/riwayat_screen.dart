@@ -63,6 +63,62 @@ class RiwayatScreen extends StatelessWidget {
         ),
         const SizedBox(height: 14),
 
+        // Ringkasan KPI Statistik Riwayat
+        if (history.isNotEmpty) ...[
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(12),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.03),
+                  blurRadius: 6,
+                  offset: const Offset(0, 2),
+                ),
+              ],
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                Column(
+                  children: [
+                    const Text('Rata-rata Skor', style: TextStyle(fontSize: 10, color: AppColors.textMuted)),
+                    const SizedBox(height: 2),
+                    Text(
+                      (history.map((e) => e.scoreMamdani).reduce((a, b) => a + b) / history.length).toStringAsFixed(1),
+                      style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: AppColors.primary),
+                    ),
+                  ],
+                ),
+                Container(height: 26, width: 1, color: AppColors.outline),
+                Column(
+                  children: [
+                    const Text('Total Tercatat', style: TextStyle(fontSize: 10, color: AppColors.textMuted)),
+                    const SizedBox(height: 2),
+                    Text(
+                      '${history.length} Hari',
+                      style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: AppColors.textHeadline),
+                    ),
+                  ],
+                ),
+                Container(height: 26, width: 1, color: AppColors.outline),
+                Column(
+                  children: [
+                    const Text('Status Terakhir', style: TextStyle(fontSize: 10, color: AppColors.textMuted)),
+                    const SizedBox(height: 2),
+                    Text(
+                      history.last.category,
+                      style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: AppColors.emeraldGreen),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(height: 12),
+        ],
+
         // Visual Trend Line Chart
         if (history.isNotEmpty)
           TrendChartWidget(

@@ -95,7 +95,7 @@ class InputScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // 1. Umur Slider
+              // 1. Umur Slider & Precision Stepper
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -106,7 +106,7 @@ class InputScreen extends StatelessWidget {
                         const SizedBox(width: 6),
                         Flexible(
                           child: Text(
-                            'Umur: ${inputAge.round()} Hari',
+                            'Umur Ayam: ${inputAge.round()} Hari',
                             overflow: TextOverflow.ellipsis,
                             style: const TextStyle(
                               fontSize: 14,
@@ -136,18 +136,34 @@ class InputScreen extends StatelessWidget {
                   ),
                 ],
               ),
-              Slider(
-                value: inputAge,
-                min: 1,
-                max: 42,
-                divisions: 41,
-                activeColor: AppColors.primary,
-                onChanged: onAgeChanged,
+              Row(
+                children: [
+                  IconButton(
+                    onPressed: inputAge > 1 ? () => onAgeChanged((inputAge - 1).clamp(1.0, 42.0)) : null,
+                    icon: const Icon(Icons.remove_circle_outline, color: AppColors.primary, size: 22),
+                    tooltip: 'Kurangi 1 Hari',
+                  ),
+                  Expanded(
+                    child: Slider(
+                      value: inputAge,
+                      min: 1,
+                      max: 42,
+                      divisions: 41,
+                      activeColor: AppColors.primary,
+                      onChanged: onAgeChanged,
+                    ),
+                  ),
+                  IconButton(
+                    onPressed: inputAge < 42 ? () => onAgeChanged((inputAge + 1).clamp(1.0, 42.0)) : null,
+                    icon: const Icon(Icons.add_circle_outline, color: AppColors.primary, size: 22),
+                    tooltip: 'Tambah 1 Hari',
+                  ),
+                ],
               ),
 
               // Live Target Temp Banner
               Container(
-                padding: const EdgeInsets.all(10),
+                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
                 decoration: BoxDecoration(
                   color: AppColors.surfaceContainerLow,
                   borderRadius: BorderRadius.circular(8),
@@ -156,14 +172,16 @@ class InputScreen extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Expanded(
+                    const Icon(Icons.insights, size: 16, color: AppColors.primary),
+                    const SizedBox(width: 6),
+                    Expanded(
                       child: Text(
-                        'Target Cobb 500 / Ross 308:',
+                        'Target Suhu Strain Hari ke-${inputAge.round()}:',
                         overflow: TextOverflow.ellipsis,
-                        style: TextStyle(fontSize: 11, color: AppColors.textBody),
+                        style: const TextStyle(fontSize: 11, color: AppColors.textBody),
                       ),
                     ),
-                    const SizedBox(width: 8),
+                    const SizedBox(width: 6),
                     Text(
                       '${targetTemp.toStringAsFixed(1)}°C',
                       style: const TextStyle(
@@ -177,7 +195,7 @@ class InputScreen extends StatelessWidget {
               ),
               const SizedBox(height: 16),
 
-              // 2. Suhu Aktual Slider
+              // 2. Suhu Aktual Slider & Precision Stepper
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -188,7 +206,7 @@ class InputScreen extends StatelessWidget {
                         const SizedBox(width: 6),
                         Flexible(
                           child: Text(
-                            'Suhu: ${inputTemp.toStringAsFixed(1)}°C',
+                            'Suhu Ruangan: ${inputTemp.toStringAsFixed(1)}°C',
                             overflow: TextOverflow.ellipsis,
                             style: const TextStyle(
                               fontSize: 14,
@@ -218,17 +236,33 @@ class InputScreen extends StatelessWidget {
                   ),
                 ],
               ),
-              Slider(
-                value: inputTemp,
-                min: 18.0,
-                max: 38.0,
-                divisions: 200,
-                activeColor: AppColors.warningButton,
-                onChanged: onTempChanged,
+              Row(
+                children: [
+                  IconButton(
+                    onPressed: inputTemp > 18.0 ? () => onTempChanged((inputTemp - 0.5).clamp(18.0, 38.0)) : null,
+                    icon: const Icon(Icons.remove_circle_outline, color: AppColors.warningButton, size: 22),
+                    tooltip: 'Kurangi 0.5°C',
+                  ),
+                  Expanded(
+                    child: Slider(
+                      value: inputTemp,
+                      min: 18.0,
+                      max: 38.0,
+                      divisions: 200,
+                      activeColor: AppColors.warningButton,
+                      onChanged: onTempChanged,
+                    ),
+                  ),
+                  IconButton(
+                    onPressed: inputTemp < 38.0 ? () => onTempChanged((inputTemp + 0.5).clamp(18.0, 38.0)) : null,
+                    icon: const Icon(Icons.add_circle_outline, color: AppColors.warningButton, size: 22),
+                    tooltip: 'Tambah 0.5°C',
+                  ),
+                ],
               ),
               const SizedBox(height: 16),
 
-              // 3. Kelembaban RH Slider
+              // 3. Kelembaban RH Slider & Precision Stepper
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -239,7 +273,7 @@ class InputScreen extends StatelessWidget {
                         const SizedBox(width: 6),
                         Flexible(
                           child: Text(
-                            'Kelembaban: ${inputRh.round()}%',
+                            'Kelembaban: ${inputRh.round()}% RH',
                             overflow: TextOverflow.ellipsis,
                             style: const TextStyle(
                               fontSize: 14,
@@ -255,33 +289,49 @@ class InputScreen extends StatelessWidget {
                   Container(
                     padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
                     decoration: BoxDecoration(
-                      color: inputRh >= 60 && inputRh <= 70
+                      color: inputRh >= 55 && inputRh <= 75
                           ? AppColors.emeraldBg
                           : AppColors.warningBg,
                       borderRadius: BorderRadius.circular(8),
                     ),
                     child: Text(
                       inputRh < 55
-                          ? 'Kering'
-                          : (inputRh > 75 ? 'Terlalu Lembab' : 'Ideal (60-70%)'),
+                          ? 'Kering (<55%)'
+                          : (inputRh > 75 ? 'Lembab (>75%)' : 'Ideal (55-75%)'),
                       style: TextStyle(
                         fontSize: 11,
                         fontWeight: FontWeight.bold,
-                        color: inputRh >= 60 && inputRh <= 70
-                            ? AppColors.emeraldText
-                            : AppColors.warningTextDark,
+                        color: inputRh >= 55 && inputRh <= 75
+                          ? AppColors.emeraldText
+                          : AppColors.warningTextDark,
                       ),
                     ),
                   ),
                 ],
               ),
-              Slider(
-                value: inputRh,
-                min: 30.0,
-                max: 95.0,
-                divisions: 65,
-                activeColor: AppColors.primary,
-                onChanged: onRhChanged,
+              Row(
+                children: [
+                  IconButton(
+                    onPressed: inputRh > 30.0 ? () => onRhChanged((inputRh - 1.0).clamp(30.0, 95.0)) : null,
+                    icon: const Icon(Icons.remove_circle_outline, color: AppColors.primary, size: 22),
+                    tooltip: 'Kurangi 1%',
+                  ),
+                  Expanded(
+                    child: Slider(
+                      value: inputRh,
+                      min: 30.0,
+                      max: 95.0,
+                      divisions: 65,
+                      activeColor: AppColors.primary,
+                      onChanged: onRhChanged,
+                    ),
+                  ),
+                  IconButton(
+                    onPressed: inputRh < 95.0 ? () => onRhChanged((inputRh + 1.0).clamp(30.0, 95.0)) : null,
+                    icon: const Icon(Icons.add_circle_outline, color: AppColors.primary, size: 22),
+                    tooltip: 'Tambah 1%',
+                  ),
+                ],
               ),
               const SizedBox(height: 20),
 
