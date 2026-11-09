@@ -121,3 +121,4 @@ class TelemetryCard extends StatelessWidget {
     );
   }
 }
+

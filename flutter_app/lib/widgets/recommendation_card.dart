@@ -129,3 +129,4 @@ class RecommendationCard extends StatelessWidget {
     );
   }
 }
+

@@ -28,14 +28,15 @@ flutter_app/lib/
 │   ├── telemetry_card.dart             # Card indikator mikroklimat (Umur, Suhu, Kelembaban)
 │   └── trend_chart.dart                # Canvas grafik tren garis CustomPainter (ScoreTrendPainter)
 │
-├── screens/                            # Layar Halaman 5 Tab Utama
+├── screens/                            # Layar Halaman 6 Tab Utama
 │   ├── beranda_screen.dart             # Dashboard utama persis mockup visual 100%
 │   ├── input_screen.dart               # Form evaluasi mikroklimat dengan slider & preset cepat
 │   ├── hasil_screen.dart               # Komparasi Mamdani vs Sugeno, IP, FCR, mortalitas
 │   ├── solusi_screen.dart              # Checklist SOP tindakan nyata & kontak hotline dokter hewan
-│   └── riwayat_screen.dart             # Arsip evaluasi harian, filter kategori & grafik tren
+│   ├── riwayat_screen.dart             # Arsip evaluasi harian, filter kategori & grafik tren
+│   └── profil_screen.dart              # Profil peternak, pengaturan kandang, strain & sistem fuzzy
 │
-└── main.dart                           # Entry point ringkas (<270 baris) menghubungkan navigasi & state
+└── main.dart                           # Entry point ringkas (<300 baris) menghubungkan navigasi 6 tab & state
 ```
 
 ---
@@ -73,6 +74,7 @@ flutter_app/lib/
 3. **`HasilScreen`**: Menampilkan skor Mamdani (Centroid) vs Sugeno (Weighted Average), tabel parameter biologis, estimasi Indeks Performa (IP), FCR, dan latensi komputasi.
 4. **`SolusiScreen`**: Checklist interaktif mitigasi kandang dengan bilah kemajuan progres penyelesaian (0–100%) dan dialog bantuan teknis.
 5. **`RiwayatScreen`**: Tampilan historis evaluasi harian dengan filter kategori (Semua, Tinggi, Sedang, Rendah) dan fitur reset data.
+6. **`ProfilScreen`**: Pengelolaan identitas peternak, data kemitraan, pilihan strain ayam acuan (Cobb 500, Ross 308, Hubbard), konfigurasi mesin inferensi default (Mamdani vs Sugeno), notifikasi peringatan dini, alarm ekstrem, ekspor riwayat (CSV/JSON), dan panduan ujian sidang.
 
 ---
 
@@ -80,3 +82,4 @@ flutter_app/lib/
 - **Clean Architecture**: Pemisahan yang jelas antara logika fuzzy murni (`fuzzy/`), representasi tampilan (`screens/` & `widgets/`), dan konfigurasi desain (`core/`).
 - **High Testability**: Seluruh logika fuzzy dan widget telah divalidasi dengan unit test (`cross_validation_test.dart`) dan widget smoke test (`widget_test.dart`) dengan status kelulusan 100%.
 - **Zero Visual Overflow**: Seluruh baris dan teks telah dilindungi dengan `Expanded`, `Flexible`, `Wrap`, dan `TextOverflow.ellipsis`, menjamin responsivitas di layar ponsel Android mana pun.
+

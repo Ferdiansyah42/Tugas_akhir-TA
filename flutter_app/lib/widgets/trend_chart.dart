@@ -143,3 +143,4 @@ class TrendChartWidget extends StatelessWidget {
     );
   }
 }
+

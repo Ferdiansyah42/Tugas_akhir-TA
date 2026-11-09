@@ -48,3 +48,4 @@ class AppColors {
   static const Color errorBg = Color(0xFFFEE2E2);
   static const Color errorText = Color(0xFF991B1B);
 }
+

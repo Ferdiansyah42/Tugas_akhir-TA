@@ -9,6 +9,7 @@ class CustomAppBar extends StatelessWidget {
   final String selectedFlock;
   final int currentAge;
   final ValueChanged<String> onFlockSelected;
+  final VoidCallback? onProfileTap;
 
   const CustomAppBar({
     super.key,
@@ -16,6 +17,7 @@ class CustomAppBar extends StatelessWidget {
     required this.selectedFlock,
     required this.currentAge,
     required this.onFlockSelected,
+    this.onProfileTap,
   });
 
   static const List<String> tabTitles = [
@@ -23,7 +25,8 @@ class CustomAppBar extends StatelessWidget {
     'Input Evaluasi',
     'Hasil Inferensi',
     'Solusi Kandang',
-    'Riwayat',
+    'Riwayat & Tren',
+    'Profil & Pengaturan',
   ];
 
   @override
@@ -119,12 +122,9 @@ class CustomAppBar extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(width: 8),
-                  PopupMenuButton<String>(
-                    initialValue: selectedFlock,
-                    onSelected: onFlockSelected,
-                    itemBuilder: (context) => AppConstants.flocks
-                        .map((f) => PopupMenuItem(value: f, child: Text(f)))
-                        .toList(),
+                  InkWell(
+                    onTap: onProfileTap,
+                    borderRadius: BorderRadius.circular(16),
                     child: Container(
                       width: 32,
                       height: 32,
@@ -149,13 +149,28 @@ class CustomAppBar extends StatelessWidget {
                     const Icon(Icons.cottage, size: 16, color: AppColors.primary),
                     const SizedBox(width: 4),
                     Expanded(
-                      child: Text(
-                        '$selectedFlock (Hari ke-$currentAge)',
-                        overflow: TextOverflow.ellipsis,
-                        style: const TextStyle(
-                          fontSize: 12,
-                          fontWeight: FontWeight.bold,
-                          color: AppColors.textHeadline,
+                      child: PopupMenuButton<String>(
+                        initialValue: selectedFlock,
+                        onSelected: onFlockSelected,
+                        itemBuilder: (context) => AppConstants.flocks
+                            .map((f) => PopupMenuItem(value: f, child: Text(f)))
+                            .toList(),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Flexible(
+                              child: Text(
+                                '$selectedFlock (Hari ke-$currentAge)',
+                                overflow: TextOverflow.ellipsis,
+                                style: const TextStyle(
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.bold,
+                                  color: AppColors.textHeadline,
+                                ),
+                              ),
+                            ),
+                            const Icon(Icons.arrow_drop_down, size: 16, color: AppColors.primary),
+                          ],
                         ),
                       ),
                     ),

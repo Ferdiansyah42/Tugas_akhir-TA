@@ -8,6 +8,7 @@ import 'screens/input_screen.dart';
 import 'screens/hasil_screen.dart';
 import 'screens/solusi_screen.dart';
 import 'screens/riwayat_screen.dart';
+import 'screens/profil_screen.dart';
 
 void main() {
   runApp(const FuzzyBroilerApp());
@@ -166,6 +167,7 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
                   currentIndex: _currentIndex,
                   selectedFlock: _selectedFlock,
                   currentAge: _currentEvaluation.age,
+                  onProfileTap: () => setState(() => _currentIndex = 5),
                   onFlockSelected: (val) {
                     setState(() => _selectedFlock = val);
                     ScaffoldMessenger.of(context).showSnackBar(
@@ -241,6 +243,20 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
                           });
                         },
                       ),
+
+                      // Tab 5: Profil & Pengaturan
+                      ProfilScreen(
+                        selectedFlock: _selectedFlock,
+                        onFlockChanged: (val) {
+                          setState(() => _selectedFlock = val);
+                        },
+                        onResetData: () {
+                          setState(() {
+                            _history.clear();
+                            _initSampleData();
+                          });
+                        },
+                      ),
                     ],
                   ),
                 ),
@@ -296,6 +312,11 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
             icon: Icon(Icons.show_chart_outlined),
             activeIcon: Icon(Icons.show_chart),
             label: 'Riwayat',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.person_outline),
+            activeIcon: Icon(Icons.person),
+            label: 'Profil',
           ),
         ],
       ),

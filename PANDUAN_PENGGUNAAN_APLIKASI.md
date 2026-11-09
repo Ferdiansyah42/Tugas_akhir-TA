@@ -91,3 +91,4 @@ Jika Anda ingin meng-install aplikasi ini langsung ke HP Android peternak atau m
 3. File APK siap pakai akan terbentuk di direktori:
    `flutter_app/build/app/outputs/flutter-apk/app-release.apk`
 4. Kirimkan file `.apk` tersebut ke HP Android Anda (melalui WhatsApp/kabel data), lalu instal dan jalankan secara mandiri tanpa butuh internet.
+

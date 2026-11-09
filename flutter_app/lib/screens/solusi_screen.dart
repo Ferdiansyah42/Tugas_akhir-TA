@@ -172,3 +172,4 @@ class SolusiScreen extends StatelessWidget {
     );
   }
 }
+

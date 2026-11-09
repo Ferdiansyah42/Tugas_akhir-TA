@@ -76,3 +76,4 @@ class PresetScenario {
 
   String get chipLabel => '$iconEmoji $name';
 }
+
