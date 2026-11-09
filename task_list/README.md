@@ -61,7 +61,10 @@ Dokumen ini merupakan panduan kerja terstruktur (*work breakdown structure*) yan
 * [**BAB 3: METODOLOGI PENELITIAN**](file:///c:/TA-saya/laporan_ta/BAB_3_METODOLOGI_PENELITIAN.md) — Alur penelitian, pemodelan matematis, modularisasi arsitektur Flutter.
 * [**BAB 4: HASIL DAN PEMBAHASAN**](file:///c:/TA-saya/laporan_ta/BAB_4_HASIL_DAN_PEMBAHASAN.md) — Hasil implementasi, benchmark 50 skenario (Sugeno 92.5x lebih cepat, korelasi 0.9987), uji black-box.
 * [**BAB 5: KESIMPULAN DAN SARAN**](file:///c:/TA-saya/laporan_ta/BAB_5_PENUTUP.md) — Kesimpulan akademis dan rekomendasi integrasi IoT/ANFIS.
+* [**DAFTAR_PUSTAKA.md**](file:///c:/TA-saya/laporan_ta/DAFTAR_PUSTAKA.md) — 20 Referensi ilmiah terstandarisasi APA 7th Edition.
+* [**LAMPIRAN.md**](file:///c:/TA-saya/laporan_ta/LAMPIRAN.md) — 6 Lampiran lengkap (Matriks 27 Aturan, Tabel 50 Skenario, Instrumen Pakar & SUS).
 
-### C. Panduan Penggunaan & Demo Sidang
+### C. Panduan Penggunaan, Demo Sidang & Presentasi
 * [**PANDUAN_PENGGUNAAN_APLIKASI.md**](file:///c:/TA-saya/PANDUAN_PENGGUNAAN_APLIKASI.md) — Petunjuk langkah-demi-langkah pengoperasian aplikasi, skenario demo sidang penguji, dan build APK Android.
+* [**PANDUAN_SLIDE_PRESENTASI_SIDANG.md**](file:///c:/TA-saya/PANDUAN_SLIDE_PRESENTASI_SIDANG.md) — Struktur 16 slide presentasi sidang, naskah bicara lisan per slide, bank tanya-jawab dosen penguji, dan skenario demo.
 

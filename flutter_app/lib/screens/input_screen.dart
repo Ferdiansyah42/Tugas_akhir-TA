@@ -52,30 +52,49 @@ class InputScreen extends StatelessWidget {
         ),
         const SizedBox(height: 12),
 
-        // Quick Preset Buttons (Sangat berguna saat sidang TA)
-        SingleChildScrollView(
-          scrollDirection: Axis.horizontal,
-          child: Row(
-            children: AppConstants.presetScenarios.map((preset) {
-              return Padding(
-                padding: const EdgeInsets.only(right: 8),
-                child: ActionChip(
-                  label: Text(
-                    preset.chipLabel,
-                    style: const TextStyle(
-                      fontSize: 11,
-                      fontWeight: FontWeight.bold,
-                      color: AppColors.primary,
+        // Quick Preset Buttons (Menggunakan Wrap agar tidak terpotong di tepi layar)
+        Wrap(
+          spacing: 8,
+          runSpacing: 8,
+          children: AppConstants.presetScenarios.map((preset) {
+            return InkWell(
+              onTap: () => onApplyPreset(preset),
+              borderRadius: BorderRadius.circular(20),
+              child: Container(
+                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 7),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(20),
+                  border: Border.all(color: AppColors.secondaryContainer),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.02),
+                      blurRadius: 4,
+                      offset: const Offset(0, 1),
                     ),
-                  ),
-                  backgroundColor: Colors.white,
-                  side: const BorderSide(color: AppColors.secondaryContainer),
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-                  onPressed: () => onApplyPreset(preset),
+                  ],
                 ),
-              );
-            }).toList(),
-          ),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(
+                      preset.iconEmoji,
+                      style: const TextStyle(fontSize: 13),
+                    ),
+                    const SizedBox(width: 5),
+                    Text(
+                      preset.name,
+                      style: const TextStyle(
+                        fontSize: 11.5,
+                        fontWeight: FontWeight.bold,
+                        color: AppColors.primary,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            );
+          }).toList(),
         ),
         const SizedBox(height: 14),
 
