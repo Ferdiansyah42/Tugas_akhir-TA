@@ -209,7 +209,7 @@ class _ProfilScreenState extends State<ProfilScreen> {
             mainAxisSize: MainAxisSize.min,
             children: const [
               Text(
-                'FuzzyBroiler IP v1.2.0',
+                'Broiler App v1.2.0',
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15, color: AppColors.textHeadline),
               ),
               SizedBox(height: 4),
@@ -592,7 +592,7 @@ class _ProfilScreenState extends State<ProfilScreen> {
             children: [
               ListTile(
                 leading: const Icon(Icons.info_outline, color: AppColors.primary),
-                title: const Text('Tentang FuzzyBroiler IP', style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold)),
+                title: const Text('Tentang Broiler App', style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold)),
                 subtitle: const Text('Informasi penelitian Tugas Akhir, versi, dan lisensi', style: TextStyle(fontSize: 11, color: AppColors.textMuted)),
                 trailing: const Icon(Icons.arrow_forward_ios, size: 14, color: AppColors.textMuted),
                 onTap: _showAboutAppDialog,
@@ -629,7 +629,7 @@ class _ProfilScreenState extends State<ProfilScreen> {
         const SizedBox(height: 20),
         const Center(
           child: Text(
-            'FuzzyBroiler IP • Tugas Akhir 2026\nSistem Pendukung Keputusan Broiler Berbasis Logika Fuzzy',
+            'Broiler App • Tugas Akhir 2026\nSistem Pendukung Keputusan Broiler Berbasis Logika Fuzzy',
             textAlign: TextAlign.center,
             style: TextStyle(fontSize: 11, color: AppColors.textMuted, height: 1.4),
           ),

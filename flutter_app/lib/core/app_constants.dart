@@ -1,6 +1,6 @@
 /// Konstanta Aplikasi, Data Preset Sidang TA, dan Metadata Kandang
 class AppConstants {
-  static const String appName = 'FuzzyBroiler IP';
+  static const String appName = 'Broiler App';
   static const String appSubtitle = 'DSS Evaluasi Mikroklimat Broiler';
   static const String defaultFlock = 'Kandang Blok A';
   static const String offlineBadge = 'Siap Pakai Tanpa Kuota';

@@ -1,6 +1,6 @@
 {
-    "name": "FuzzyBroiler IP - Sistem Evaluasi Potensi Broiler Adaptif Umur",
-    "short_name": "FuzzyBroiler",
+    "name": "Broiler App - Sistem Evaluasi Potensi Broiler Adaptif Umur",
+    "short_name": "Broiler App",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#005C55",

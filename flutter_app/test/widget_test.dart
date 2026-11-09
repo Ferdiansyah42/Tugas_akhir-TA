@@ -9,7 +9,7 @@ void main() {
     await tester.pumpAndSettle();
 
     // Verifikasi bahwa teks judul dan elemen utama muncul
-    expect(find.text('FuzzyBroiler IP'), findsOneWidget);
+    expect(find.text('Broiler App'), findsOneWidget);
     expect(find.text('STATUS KANDANG SAAT INI'), findsOneWidget);
     expect(find.textContaining('KONDISI'), findsWidgets);
 
