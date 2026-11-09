@@ -98,3 +98,4 @@
 1. **Siapkan 2 Perangkat**: Satu laptop untuk menampilkan slide presentasi, dan satu smartphone Android (atau emulator) dengan aplikasi terinstal untuk demo langsung.
 2. **Ucapkan Angka Secara Rinci**: Selalu sebutkan metrik kuantitatif (*92.5 kali lebih cepat, korelasi 0.9987, MAE 3.88 poin, 27 basis aturan*). Dosen penguji sangat menyukai data kuantitatif yang presisi.
 3. **Posisikan Diri Sebagai Problem Solver**: Tunjukkan bahwa penelitian ini bukan sekadar tugas pemrograman, tetapi solusi nyata untuk menyelamatkan ribuan ayam broiler peternak dari ancaman kematian mendadak (*heat stress*).
+

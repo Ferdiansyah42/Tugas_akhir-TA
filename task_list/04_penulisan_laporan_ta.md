@@ -36,3 +36,9 @@ Dokumen ini memuat status penyusunan naskah lengkap Buku Laporan Tugas Akhir ses
 - [x] **Bab 5: Penutup ([`laporan_ta/BAB_5_PENUTUP.md`](file:///c:/TA-saya/laporan_ta/BAB_5_PENUTUP.md))**
   - [x] 5.1 Kesimpulan: Menjawab ketiga rumusan masalah secara kuantitatif dan kualitatif.
   - [x] 5.2 Saran: Integrasi sensor IoT nirkabel (ESP32), ANFIS, dan sinkronisasi cloud multi-kandang.
+
+- [x] **Bagian Akhir & Kelengkapan Sidang**:
+  - [x] **Daftar Pustaka ([`laporan_ta/DAFTAR_PUSTAKA.md`](file:///c:/TA-saya/laporan_ta/DAFTAR_PUSTAKA.md))**: 20 referensi ilmiah terstandarisasi APA edisi 7.
+  - [x] **Lampiran ([`laporan_ta/LAMPIRAN.md`](file:///c:/TA-saya/laporan_ta/LAMPIRAN.md))**: 6 lampiran lengkap (27 aturan, 50 data uji, kuesioner pakar & SUS, cuplikan kode).
+  - [x] **Panduan Slide Sidang ([`PANDUAN_SLIDE_PRESENTASI_SIDANG.md`](file:///c:/TA-saya/PANDUAN_SLIDE_PRESENTASI_SIDANG.md))**: Struktur 16 slide, narasi lisan, bank tanya-jawab dosen penguji, dan skenario live demo.
+  - [x] **Panduan Penggunaan Aplikasi ([`PANDUAN_PENGGUNAAN_APLIKASI.md`](file:///c:/TA-saya/PANDUAN_PENGGUNAAN_APLIKASI.md))**: Petunjuk instalasi APK Android dan operasional sistem.

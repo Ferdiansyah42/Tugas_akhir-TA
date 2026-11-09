@@ -80,14 +80,16 @@ flutter_app/lib/
 
 ---
 
-### D. Desain Navigasi Bawah Modern (Custom Bottom Navigation Bar)
-1. **Active Capsule Pill**: Menggantikan bilah navigasi lama yang kaku dengan kapsul berlatar lembut (*Soft Mint* `#E0F2F1`) di belakang ikon aktif, selaras dengan standar Google Material 3.
-2. **Ikon Modern & Representatif**:
-   - `Beranda`: `Icons.space_dashboard_rounded` (Dasbor cerdas 4 kuadran menggantikan ikon grid generik).
-   - `Evaluasi`: `Icons.analytics_rounded` (Analitik data inferensi ilmiah menggantikan ikon tune/audio).
-   - `Solusi`: `Icons.assignment_turned_in_rounded` (Checklist SOP kandang tervalidasi menggantikan ikon checklist biasa).
-   - `Riwayat`: `Icons.auto_graph_rounded` (Kurva tren performa futuristik menggantikan grafik zigzag sederhana).
-3. **Elevasi & Tipografi Halus**: Bayangan lembut (*soft drop shadow*) `blurRadius: 16` tanpa garis pembatas kasar, serta tipografi `FontWeight.w700` dengan *letter-spacing* dinamis.
+### D. Desain Navigasi Bawah Modern (Floating Glossy Island Dock)
+1. **Floating Island Capsule (Bebas Tumpang Tindih)**: Menggantikan bilah persegi kaku yang menabrak kartu dengan *dock* melayang membulat (*floating rounded dock* `borderRadius: 24`, margin `horizontal: 16`) sehingga konten kartu di belakangnya tidak lagi terpotong kasar.
+2. **Efek Glossy / Glassmorphism**: Dilengkapi gradien semi-transparan `Colors.white (0.97)` ke `Color(0xFFF0FDF8) (0.93)`, *border highlight* putih kaca `1.5px`, serta bayangan ambien ganda (*dual glowing drop shadow*).
+3. **Active Glossy Mint Pill**: Kapsul aktif dengan gradien berkilau (*Mint-to-Teal* `#E0F2F1` ke `#C7EDE6`), garis tepi halus `1.0px`, dan *inner glow*.
+4. **Ikon Modern & Representatif**:
+   - `Beranda`: `Icons.space_dashboard_rounded` (Dasbor cerdas 4 kuadran).
+   - `Evaluasi`: `Icons.analytics_rounded` (Analitik data inferensi ilmiah).
+   - `Solusi`: `Icons.assignment_turned_in_rounded` (Checklist SOP kandang tervalidasi).
+   - `Riwayat`: `Icons.auto_graph_rounded` (Kurva tren performa futuristik).
+5. **Scroll Clearance**: Seluruh layar (`ListView`) memiliki *bottom padding* ekstra `32px` agar elemen terbawah dapat digulir bebas melewati bilah navigasi tanpa terhalang.
 
 ---
 

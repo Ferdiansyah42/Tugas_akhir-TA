@@ -32,7 +32,7 @@ class RiwayatScreen extends StatelessWidget {
     }).toList();
 
     return ListView(
-      padding: const EdgeInsets.all(16),
+      padding: const EdgeInsets.fromLTRB(16, 16, 16, 32),
       children: [
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,

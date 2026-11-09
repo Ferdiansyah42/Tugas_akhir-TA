@@ -40,7 +40,7 @@ class BerandaScreen extends StatelessWidget {
     final statusIcon = isGood ? Icons.check_circle : (isMed ? Icons.warning_amber_rounded : Icons.error_outline);
 
     return ListView(
-      padding: const EdgeInsets.all(16),
+      padding: const EdgeInsets.fromLTRB(16, 16, 16, 32),
       children: [
         // 1. Early Warning Alert Banner
         if (showEarlyWarning)

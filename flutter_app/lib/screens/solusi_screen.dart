@@ -50,7 +50,7 @@ class SolusiScreen extends StatelessWidget {
         .length;
 
     return ListView(
-      padding: const EdgeInsets.all(16),
+      padding: const EdgeInsets.fromLTRB(16, 16, 16, 32),
       children: [
         const Text(
           'Panduan Tindakan Korektif',

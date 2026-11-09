@@ -284,21 +284,38 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
 
   Widget _buildBottomNavigationBar() {
     return Container(
-      decoration: BoxDecoration(
-        color: Colors.white,
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.06),
-            blurRadius: 16,
-            offset: const Offset(0, -4),
-          ),
-        ],
+      padding: const EdgeInsets.fromLTRB(16, 2, 16, 12),
+      decoration: const BoxDecoration(
+        color: Colors.transparent,
       ),
       child: SafeArea(
         top: false,
         child: Container(
-          height: 70,
-          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+          height: 66,
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: [
+                Colors.white.withOpacity(0.97),
+                const Color(0xFFF0FDF8).withOpacity(0.93),
+              ],
+            ),
+            borderRadius: BorderRadius.circular(24),
+            border: Border.all(color: Colors.white, width: 1.5),
+            boxShadow: [
+              BoxShadow(
+                color: AppColors.primary.withOpacity(0.12),
+                blurRadius: 20,
+                offset: const Offset(0, 6),
+              ),
+              BoxShadow(
+                color: Colors.black.withOpacity(0.04),
+                blurRadius: 8,
+                offset: const Offset(0, 2),
+              ),
+            ],
+          ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
@@ -343,7 +360,7 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
     return Expanded(
       child: InkWell(
         onTap: () => setState(() => _currentIndex = index),
-        borderRadius: BorderRadius.circular(16),
+        borderRadius: BorderRadius.circular(20),
         splashColor: AppColors.primaryFixed.withOpacity(0.2),
         highlightColor: Colors.transparent,
         child: Padding(
@@ -357,8 +374,27 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
                 curve: Curves.easeInOut,
                 padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 3),
                 decoration: BoxDecoration(
-                  color: isSelected ? const Color(0xFFE0F2F1) : Colors.transparent,
-                  borderRadius: BorderRadius.circular(20),
+                  gradient: isSelected
+                      ? const LinearGradient(
+                          begin: Alignment.topLeft,
+                          end: Alignment.bottomRight,
+                          colors: [Color(0xFFE0F2F1), Color(0xFFC7EDE6)],
+                        )
+                      : null,
+                  color: isSelected ? null : Colors.transparent,
+                  borderRadius: BorderRadius.circular(18),
+                  border: isSelected
+                      ? Border.all(color: AppColors.primary.withOpacity(0.25), width: 1.0)
+                      : null,
+                  boxShadow: isSelected
+                      ? [
+                          BoxShadow(
+                            color: AppColors.primary.withOpacity(0.12),
+                            blurRadius: 6,
+                            offset: const Offset(0, 2),
+                          ),
+                        ]
+                      : null,
                 ),
                 child: Icon(
                   isSelected ? activeIcon : icon,
