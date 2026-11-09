@@ -588,7 +588,7 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
               Container(
                 padding: const EdgeInsets.all(12),
                 decoration: BoxDecoration(
-                  color: const Color(0xFF0F766E).withOpacity(0.9),
+                  color: Color(0xFF0F766E).withOpacity(0.9),
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: Row(
@@ -601,7 +601,7 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
                         color: Colors.white.withOpacity(0.15),
                         shape: BoxShape.circle,
                       ),
-                      child: const Icon(Icons.mode_fan, color: Colors.white, size: 18),
+                      child: const Icon(Icons.air, color: Colors.white, size: 18),
                     ),
                     const SizedBox(width: 10),
                     Expanded(
@@ -661,7 +661,7 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
                   Container(
                     padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
                     decoration: BoxDecoration(
-                      color: const Color(0xFF6FFBBE).withOpacity(0.3),
+                      color: Color(0xFF6FFBBE).withOpacity(0.3),
                       borderRadius: BorderRadius.circular(12),
                     ),
                     child: const Text('Siklus Berjalan', style: TextStyle(fontSize: 10, fontWeight: FontWeight.bold, color: Color(0xFF005E3F))),
@@ -981,7 +981,7 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
                       decoration: BoxDecoration(
                         color: const Color(0xFFEFF4FF),
                         borderRadius: BorderRadius.circular(12),
-                        border: Border.all(color: const Color(0xFF005C55).withOpacity(0.3)),
+                        border: Border.all(color: Color(0xFF005C55).withOpacity(0.3)),
                       ),
                       child: Column(
                         children: [
@@ -1112,9 +1112,9 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
         ..._currentEvaluation.recommendationDetails.map((item) {
           IconData itemIcon;
           if (item.iconName == 'mode_fan') {
-            itemIcon = Icons.mode_fan;
+            itemIcon = Icons.air;
           } else if (item.iconName == 'curtains') {
-            itemIcon = Icons.window;
+            itemIcon = Icons.curtains;
           } else if (item.iconName == 'thermostat') {
             itemIcon = Icons.device_thermostat;
           } else {
@@ -1274,8 +1274,8 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
             label: 'Solusi',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.monitoring_outlined),
-            activeIcon: Icon(Icons.monitoring),
+            icon: Icon(Icons.show_chart_outlined),
+            activeIcon: Icon(Icons.show_chart),
             label: 'Riwayat',
           ),
         ],
