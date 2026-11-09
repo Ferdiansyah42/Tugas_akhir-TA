@@ -1359,6 +1359,19 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
     );
   }
 
+  Widget _buildResultRow(String label, String value) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 4),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(label, style: const TextStyle(fontSize: 12, color: Color(0xFF6E7977))),
+          Text(value, style: const TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: Color(0xFF0B1C30))),
+        ],
+      ),
+    );
+  }
+
   // ================= 5. TAB 4: SOLUSI (Interaktif Checklist Nyata) =================
   Widget _buildSolusiTab() {
     final totalActions = _currentEvaluation.recommendationDetails.length;

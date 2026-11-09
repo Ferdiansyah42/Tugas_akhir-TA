@@ -27,3 +27,4 @@ Untuk pengembangan sistem lebih lanjut pada masa yang akan datang, beberapa sara
 
 3. **Fitur Sinkronisasi Cloud Multi-Kandang (Opsional)**:
    Menambahkan layanan sinkronisasi data cloud latar belakang (*background cloud sync*) yang otomatis mencadangkan riwayat evaluasi lokal ke server pusat ketika perangkat pengguna mendeteksi adanya jaringan internet, serta menyediakan fitur pemantauan terpusat (*web dashboard monitor*) bagi pemilik peternakan yang memiliki lebih dari satu blok kandang.
+
