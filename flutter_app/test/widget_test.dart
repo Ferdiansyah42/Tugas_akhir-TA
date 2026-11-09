@@ -26,7 +26,7 @@ void main() {
     expect(find.text('Hasil Inferensi'), findsOneWidget);
 
     // Verifikasi buka Profil & Pengaturan via avatar
-    await tester.tap(find.byIcon(Icons.person));
+    await tester.tap(find.byKey(const Key('app_bar_profile_avatar')));
     await tester.pumpAndSettle();
     expect(find.text('Ferdiansyah'), findsOneWidget);
   });

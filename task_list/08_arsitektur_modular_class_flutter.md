@@ -80,6 +80,17 @@ flutter_app/lib/
 
 ---
 
+### D. Desain Navigasi Bawah Modern (Custom Bottom Navigation Bar)
+1. **Active Capsule Pill**: Menggantikan bilah navigasi lama yang kaku dengan kapsul berlatar lembut (*Soft Mint* `#E0F2F1`) di belakang ikon aktif, selaras dengan standar Google Material 3.
+2. **Ikon Modern & Representatif**:
+   - `Beranda`: `Icons.space_dashboard_rounded` (Dasbor cerdas 4 kuadran menggantikan ikon grid generik).
+   - `Evaluasi`: `Icons.analytics_rounded` (Analitik data inferensi ilmiah menggantikan ikon tune/audio).
+   - `Solusi`: `Icons.assignment_turned_in_rounded` (Checklist SOP kandang tervalidasi menggantikan ikon checklist biasa).
+   - `Riwayat`: `Icons.auto_graph_rounded` (Kurva tren performa futuristik menggantikan grafik zigzag sederhana).
+3. **Elevasi & Tipografi Halus**: Bayangan lembut (*soft drop shadow*) `blurRadius: 16` tanpa garis pembatas kasar, serta tipografi `FontWeight.w700` dengan *letter-spacing* dinamis.
+
+---
+
 ## 3. Keunggulan Akademik untuk Sidang Tugas Akhir
 - **Clean Architecture**: Pemisahan yang jelas antara logika fuzzy murni (`fuzzy/`), representasi tampilan (`screens/` & `widgets/`), dan konfigurasi desain (`core/`).
 - **High Testability**: Seluruh logika fuzzy dan widget telah divalidasi dengan unit test (`cross_validation_test.dart`) dan widget smoke test (`widget_test.dart`) dengan status kelulusan 100%.

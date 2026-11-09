@@ -1,11 +1,11 @@
 {
-    "name": "flutter_app",
-    "short_name": "flutter_app",
+    "name": "FuzzyBroiler IP - Sistem Evaluasi Potensi Broiler Adaptif Umur",
+    "short_name": "FuzzyBroiler",
     "start_url": ".",
     "display": "standalone",
-    "background_color": "#0175C2",
-    "theme_color": "#0175C2",
-    "description": "A new Flutter project.",
+    "background_color": "#005C55",
+    "theme_color": "#005C55",
+    "description": "Sistem Pendukung Keputusan Evaluasi Potensi Indeks Performa Ayam Broiler Berbasis Logika Fuzzy Adaptif Umur (Tugas Akhir).",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [

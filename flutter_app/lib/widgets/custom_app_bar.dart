@@ -127,6 +127,7 @@ class CustomAppBar extends StatelessWidget {
                   ),
                   const SizedBox(width: 8),
                   InkWell(
+                    key: const Key('app_bar_profile_avatar'),
                     onTap: onProfileTap,
                     borderRadius: BorderRadius.circular(16),
                     child: ClipOval(
