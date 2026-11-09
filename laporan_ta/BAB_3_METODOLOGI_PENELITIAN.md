@@ -51,14 +51,17 @@ $$z^* = \frac{\sum_{i=1}^{27} \alpha_i \cdot z_i}{\sum_{i=1}^{27} \alpha_i}$$
 ---
 
 ## 3.4 Perancangan Arsitektur Perangkat Lunak Flutter
-Aplikasi dirancang menggunakan framework Flutter (Dart) dengan prinsip pemisahan tanggung jawab (*separation of concerns*):
-1. **Modul `fuzzy/`**: Mesin logika fuzzy murni tanpa ketergantungan UI untuk mempermudah pengujian modular (*unit test*).
-2. **Modul `ui/`**: 5 Layar tampilan terpadu:
-   * **Beranda**: Visualisasi ringkasan status kandang, skor 0–100, telemetri suhu/RH, dan banner peringatan dini.
-   * **Input Evaluasi**: Formulir input dengan deteksi fase otomatis dan pratinjau target temperatur strain.
-   * **Hasil Evaluasi**: Komparasi skor Mamdani vs Sugeno dan proyeksi IP.
-   * **Solusi Kandang**: Panduan tindakan korektif hierarkis (blower, tirai, air minum).
-   * **Riwayat**: Catatan evaluasi harian tersimpan lokal.
+Aplikasi dirancang menggunakan framework Flutter (Dart) dengan prinsip pemisahan tanggung jawab (*separation of concerns*) dan pola arsitektur modular berlapis:
+1. **Lapisan Core (`lib/core/`)**: Mengenkapsulasi token warna resmi (*Deep Teal* `#005C55`, *Warm Amber* `#D97706`, *Emerald* `#059669`), konstanta aplikasi, daftar kandang, dan preset skenario uji.
+2. **Lapisan Fuzzy Engine (`lib/fuzzy/`)**: Mesin logika fuzzy murni (*pure Dart*) yang mandiri tanpa ketergantungan UI, mengeksekusi 27 basis aturan, pemetaan target adaptif strain (Cobb 500, Ross 308, Hubbard), serta defuzzifikasi Mamdani dan Sugeno secara instan (< 1 ms).
+3. **Lapisan Komponen UI Reusable (`lib/widgets/`)**: Komponen modular seperti `HeroScoreCard`, `TelemetryCard`, `FlockBannerCard` dengan ilustrasi digital, `ActionChecklistTile`, `ScoreTrendPainter` (*CustomPaint* vektor), dan `FuzzyMembershipDialog` (visualisator kurva fungsi keanggotaan interaktif).
+4. **Lapisan Layar Terpadu (`lib/screens/`) & Navigasi 4-Tab Ergonomis**:
+   * **Beranda (`BerandaScreen`)**: Dashboard status mikroklimat, pembacaan telemetri 3-grid, banner peringatan dini, dan akses cepat pengaturan.
+   * **Evaluasi (`EvaluasiScreen`)**: Modul terpadu ber-sub-tab yang menggabungkan formulir input parameter mikroklimat dengan penampil hasil inferensi ilmiah dan tombol akses kurva fuzzy.
+   * **Solusi (`SolusiScreen`)**: Checklist interaktif mitigasi operasional closed-house (blower, tirai, cooling pad, pemanas) disertai indikator progres penyelesaian.
+   * **Riwayat (`RiwayatScreen`)**: Arsip log evaluasi harian tersimpan lokal dengan filter kategori dan grafik garis tren performa.
+   * **Profil & Pengaturan (`ProfilScreen`)**: Pengelolaan identitas peternak, data kemitraan, pilihan strain acuan, dan manajemen data offline/cloud sync yang diakses melalui avatar peternak di AppBar.
+5. **Navigasi Bawah Modern (Material 3 Active Pill)**: Menggunakan bilah navigasi 4 tab lega (\~25% lebar layar) berlatar kapsul lembut (*Soft Mint* `#E0F2F1`) dan bayangan ambien melayang (*ambient drop shadow*).
 
 ---
 

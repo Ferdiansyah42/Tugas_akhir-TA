@@ -3,12 +3,13 @@
 ## 4.1 Hasil Implementasi Sistem
 Aplikasi Sistem Pendukung Keputusan (SPK) *FuzzyBroiler IP* berhasil diimplementasikan menggunakan framework Flutter (Dart) yang berjalan 100% offline pada sistem operasi Android. Sistem mampu membaca tiga parameter masukan (umur ayam, temperatur aktual, dan kelembaban udara), menghitung deviasi terhadap kurva target suhu strain broiler secara otomatis, mengevaluasi 27 basis aturan, serta menyajikan skor potensi performa panen.
 
-### 4.1.1 Antarmuka Pengguna (5 Layar Utama)
-1. **Layar Beranda**: Menampilkan kartu status kandang utama (*KONDISI BAIK SEKALI*, skor kesehatan 86/100 dengan progress bar hijau), 3 kartu telemetri mikroklimat, widget langkah penting hari ini, dan banner peringatan dini (*Early Warning Alert*) jika terdeteksi penurunan kondisi kandang.
-2. **Layar Input Evaluasi**: Dilengkapi fitur deteksi fase pemeliharaan instan (*Starter / Grower / Finisher*) dan penampil target temperatur optimal strain acuan (Cobb 500 / Ross 308).
-3. **Layar Hasil Inferensi**: Menampilkan perbandingan nilai skor Mamdani vs Sugeno berdampingan, rincian deviasi suhu, serta estimasi kategori Indeks Performa.
-4. **Layar Solusi Tindakan**: Menyajikan panduan tindakan hierarkis sesuai tingkat urgensi (penanganan kipas blower, bukaan tirai, sekam, dan air minum).
-5. **Layar Riwayat**: Menyimpan seluruh log evaluasi harian secara offline pada memori perangkat.
+### 4.1.1 Antarmuka Pengguna Terpadu (4 Tab Utama & Modul Profil)
+1. **Layar Beranda (`BerandaScreen`)**: Menampilkan kartu status kesehatan kandang (*KONDISI BAIK SEKALI*, skor 86/100), 3 kartu telemetri mikroklimat (Umur, Suhu, RH), langkah penting hari ini, kartu siklus closed house dengan ilustrasi visual modern, serta banner peringatan dini (*Early Warning Alert*) jika terdeteksi anomali.
+2. **Layar Evaluasi Terpadu (`EvaluasiScreen`)**: Mengintegrasikan formulir masukan (*Form Input*) dan pratinjau hasil inferensi (*Hasil Inferensi*) dalam satu layar ber-sub-tab, dilengkapi tombol terapung (*Floating Action Button*) untuk visualisasi kurva fungsi keanggotaan fuzzy interaktif 4-vektor.
+3. **Layar Solusi SOP Kandang (`SolusiScreen`)**: Menyajikan checklist tindakan korektif hierarkis (ventilasi, tirai, cooling pad, pemanas) disertai persentase progres penyelesaian dan kontak darurat hotline dokter hewan.
+4. **Layar Riwayat & Tren Performa (`RiwayatScreen`)**: Menyimpan log evaluasi harian secara offline pada memori perangkat dilengkapi grafik garis tren skor berbasis *CustomPainter* dan filter kategori.
+5. **Layar Profil & Pengaturan (`ProfilScreen`)**: Modul pengelolaan identitas peternak, kemitraan, pilihan strain acuan (Cobb 500, Ross 308, Hubbard), dan manajemen data offline/cloud sync yang diakses via avatar di header aplikasi.
+6. **Bilah Navigasi Bawah Ergonomis**: Menerapkan 4 tab lega dengan kapsul indikator aktif (*Active Pill Capsule* Material 3 `#E0F2F1`) dan bayangan lembut melayang, menjamin bebas dari *pixel overflow* pada berbagai resolusi layar smartphone.
 
 ---
 
@@ -47,7 +48,7 @@ Berdasarkan pengujian unit test silang (*cross-validation test*) antara prototip
 | 3 | Eksekusi Inferensi | Klik tombol "Jalankan Inferensi" | Skor Mamdani & Sugeno tampil di Tab Hasil | **Valid (Pass)** |
 | 4 | Sistem Deteksi Dini | Memasukkan tren skor turun 3 hari | Banner peringatan kuning muncul di Beranda | **Valid (Pass)** |
 | 5 | Rekomendasi Tindakan | Menguji kondisi panas vs dingin | Saran tindakan kipas/pemanas berganti dinamis | **Valid (Pass)** |
-| 6 | Navigasi Bottom Bar | Berpindah antar 5 tab menu | Halaman beralih mulus tanpa *freeze/lag* | **Valid (Pass)** |
+| 6 | Navigasi Bottom Bar Modern | Berpindah antar 4 tab lega & buka modal profil | Kapsul aktif beralih mulus, 0 pixel overflow | **Valid (Pass)** |
 
 ---
 

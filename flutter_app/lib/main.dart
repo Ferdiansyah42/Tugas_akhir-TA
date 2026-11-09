@@ -297,8 +297,8 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
       child: SafeArea(
         top: false,
         child: Container(
-          height: 66,
-          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+          height: 70,
+          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
@@ -346,10 +346,8 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
         borderRadius: BorderRadius.circular(16),
         splashColor: AppColors.primaryFixed.withOpacity(0.2),
         highlightColor: Colors.transparent,
-        child: AnimatedContainer(
-          duration: const Duration(milliseconds: 200),
-          curve: Curves.easeInOut,
-          padding: const EdgeInsets.symmetric(vertical: 4),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 2),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.center,
@@ -357,7 +355,7 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
               AnimatedContainer(
                 duration: const Duration(milliseconds: 200),
                 curve: Curves.easeInOut,
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+                padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 3),
                 decoration: BoxDecoration(
                   color: isSelected ? const Color(0xFFE0F2F1) : Colors.transparent,
                   borderRadius: BorderRadius.circular(20),
@@ -368,13 +366,13 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
                   size: 22,
                 ),
               ),
-              const SizedBox(height: 3),
+              const SizedBox(height: 2),
               Text(
                 label,
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
                 style: TextStyle(
-                  fontSize: 11,
+                  fontSize: 10.5,
                   fontWeight: isSelected ? FontWeight.w700 : FontWeight.w500,
                   color: isSelected ? AppColors.primary : AppColors.textMuted,
                   letterSpacing: isSelected ? 0.2 : 0.0,
