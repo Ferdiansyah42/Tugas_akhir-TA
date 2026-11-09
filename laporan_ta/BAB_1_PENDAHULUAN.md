@@ -39,3 +39,4 @@ Tujuan yang hendak dicapai dalam penelitian ini adalah:
 ## 1.5 Manfaat Penelitian
 1. **Bagi Peternak Rakyat**: Memberikan alat bantu praktis di genggaman yang tidak membutuhkan kuota internet untuk mendeteksi ancaman penurunan performa kandang sedini mungkin sehingga kerugian mortalitas dan pembengkakan pakan dapat dicegah.
 2. **Bagi Pengembangan Ilmu Pengetahuan**: Memberikan kontribusi akademis mengenai penerapan *soft computing* logika fuzzy adaptif umur dalam domain peternakan presisi (*precision poultry farming*).
+

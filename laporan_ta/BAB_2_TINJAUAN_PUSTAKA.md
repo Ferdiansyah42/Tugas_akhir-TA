@@ -63,3 +63,4 @@ Keunggulan utama metode Sugeno adalah efisiensi komputasinya yang jauh lebih cep
 | **Rahmawati (2023)** | Rule-Based Expert System | Gejala klinis ayam | Bersifat kuratif setelah ayam sakit, tidak memantau mikroklimat harian. | Bersifat **preventif harian** dengan sistem peringatan dini (*early warning* tren 3 hari). |
 | **Kurniawan dkk. (2024)** | Fuzzy Mamdani Android | Suhu & Kelembaban | Hanya menggunakan satu algoritma; tidak membandingkan efisiensi runtime. | Melakukan **komparasi komputasi empiris Mamdani vs Sugeno** (latensi dan MAE). |
 | **Penelitian Ini (2026)** | **Adaptive FIS (Mamdani & Sugeno)** | **Umur (0–42 hr), Deviasi Suhu, Kelembaban** | - | **Aplikasi Flutter offline, 27 aturan adaptif biologis, rekomendasi tindakan hierarkis, komparasi performa.** |
+
