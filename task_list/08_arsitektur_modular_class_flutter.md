@@ -19,24 +19,26 @@ flutter_app/lib/
 │
 ├── widgets/                            # Komponen UI Reusable
 │   ├── action_checklist_tile.dart      # Tile SOP interaktif dengan checkbox & dynamic icon
-│   ├── custom_app_bar.dart             # Header bar dengan status kandang & indikator offline
+│   ├── custom_app_bar.dart             # Header bar dengan status kandang, avatar profil & indikator offline
 │   ├── early_warning_banner.dart       # Banner peringatan dini amber dengan aksi langsung
 │   ├── evaluation_detail_modal.dart    # Bottom sheet modal rincian ilmiah inferensi
 │   ├── flock_banner_card.dart          # Card metadata kandang closed house (Cobb 500, populasi)
+│   ├── fuzzy_membership_dialog.dart   # Visualisator kurva fungsi keanggotaan fuzzy interaktif (vektor 4 tab)
 │   ├── hero_score_card.dart            # Card skor hero 0–100, progress bar & prediksi panen
 │   ├── recommendation_card.dart        # Card langkah prioritas hari ini
 │   ├── telemetry_card.dart             # Card indikator mikroklimat (Umur, Suhu, Kelembaban)
 │   └── trend_chart.dart                # Canvas grafik tren garis CustomPainter (ScoreTrendPainter)
 │
-├── screens/                            # Layar Halaman 6 Tab Utama
-│   ├── beranda_screen.dart             # Dashboard utama persis mockup visual 100%
+├── screens/                            # Layar Halaman 4 Tab Utama & Modul Terpadu
+│   ├── beranda_screen.dart             # Dashboard utama persis mockup visual 100% (+ Quick Access Pengaturan)
+│   ├── evaluasi_screen.dart            # Layar terpadu Input & Hasil dengan Sub-tabs & Akses Kurva Fuzzy
 │   ├── input_screen.dart               # Form evaluasi mikroklimat dengan slider & preset cepat
 │   ├── hasil_screen.dart               # Komparasi Mamdani vs Sugeno, IP, FCR, mortalitas
 │   ├── solusi_screen.dart              # Checklist SOP tindakan nyata & kontak hotline dokter hewan
 │   ├── riwayat_screen.dart             # Arsip evaluasi harian, filter kategori & grafik tren
-│   └── profil_screen.dart              # Profil peternak, pengaturan kandang, strain & sistem fuzzy
+│   └── profil_screen.dart              # Profil peternak, pengaturan kandang, strain & sistem fuzzy (Akses via AppBar Avatar)
 │
-└── main.dart                           # Entry point ringkas (<300 baris) menghubungkan navigasi 6 tab & state
+└── main.dart                           # Entry point ringkas (<250 baris) menghubungkan navigasi 4 tab ergonomis
 ```
 
 ---

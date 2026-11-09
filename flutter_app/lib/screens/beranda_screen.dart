@@ -17,6 +17,7 @@ class BerandaScreen extends StatelessWidget {
   final VoidCallback onNavigateToInput;
   final VoidCallback onNavigateToHasil;
   final VoidCallback onNavigateToSolusi;
+  final VoidCallback? onNavigateToProfil;
 
   const BerandaScreen({
     super.key,
@@ -27,6 +28,7 @@ class BerandaScreen extends StatelessWidget {
     required this.onNavigateToInput,
     required this.onNavigateToHasil,
     required this.onNavigateToSolusi,
+    this.onNavigateToProfil,
   });
 
   @override
@@ -179,6 +181,23 @@ class BerandaScreen extends StatelessWidget {
             style: TextStyle(fontSize: 11, color: AppColors.textMuted),
           ),
         ),
+        if (onNavigateToProfil != null) ...[
+          const SizedBox(height: 12),
+          OutlinedButton.icon(
+            onPressed: onNavigateToProfil,
+            style: OutlinedButton.styleFrom(
+              foregroundColor: AppColors.primary,
+              side: const BorderSide(color: AppColors.outline),
+              padding: const EdgeInsets.symmetric(vertical: 12),
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+            ),
+            icon: const Icon(Icons.settings_outlined, size: 18),
+            label: const Text(
+              '⚙️ Pengaturan Aplikasi & Profil Peternak',
+              style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
+            ),
+          ),
+        ],
         const SizedBox(height: 16),
       ],
     );

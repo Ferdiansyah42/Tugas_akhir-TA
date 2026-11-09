@@ -188,10 +188,19 @@ class _ProfilScreenState extends State<ProfilScreen> {
       context: context,
       builder: (context) => AlertDialog(
         title: Row(
-          children: const [
-            Icon(Icons.cruelty_free, color: AppColors.primary),
-            SizedBox(width: 8),
-            Text('Tentang Aplikasi', style: TextStyle(fontWeight: FontWeight.bold, color: AppColors.primary)),
+          children: [
+            ClipRRect(
+              borderRadius: BorderRadius.circular(6),
+              child: Image.asset(
+                'assets/images/smart_farm_icon.png',
+                width: 26,
+                height: 26,
+                fit: BoxFit.cover,
+                errorBuilder: (c, e, s) => const Icon(Icons.cruelty_free, color: AppColors.primary),
+              ),
+            ),
+            const SizedBox(width: 8),
+            const Text('Tentang Aplikasi', style: TextStyle(fontWeight: FontWeight.bold, color: AppColors.primary)),
           ],
         ),
         content: SingleChildScrollView(
@@ -230,22 +239,44 @@ class _ProfilScreenState extends State<ProfilScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return ListView(
+    final canPop = Navigator.canPop(context);
+
+    Widget content = ListView(
       padding: const EdgeInsets.all(16),
       children: [
-        // 1. Heading Layar
-        const Text(
-          'Profil & Pengaturan',
-          style: TextStyle(
-            fontSize: 20,
-            fontWeight: FontWeight.bold,
-            color: AppColors.primary,
+        if (canPop)
+          Row(
+            children: [
+              IconButton(
+                onPressed: () => Navigator.pop(context),
+                icon: const Icon(Icons.arrow_back, color: AppColors.primary),
+                tooltip: 'Kembali',
+              ),
+              const SizedBox(width: 4),
+              const Text(
+                'Pengaturan & Profil',
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  color: AppColors.primary,
+                ),
+              ),
+            ],
+          )
+        else ...[
+          const Text(
+            'Profil & Pengaturan',
+            style: TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+              color: AppColors.primary,
+            ),
           ),
-        ),
-        const Text(
-          'Kelola identitas peternak, data kandang, preferensi sistem fuzzy & offline.',
-          style: TextStyle(fontSize: 12, color: AppColors.textMuted),
-        ),
+          const Text(
+            'Kelola identitas peternak, data kandang, preferensi sistem fuzzy & offline.',
+            style: TextStyle(fontSize: 12, color: AppColors.textMuted),
+          ),
+        ],
         const SizedBox(height: 14),
 
         // 2. Kartu Profil Peternak
@@ -274,10 +305,18 @@ class _ProfilScreenState extends State<ProfilScreen> {
                       shape: BoxShape.circle,
                       border: Border.all(color: AppColors.secondaryContainer, width: 2),
                     ),
-                    child: const Center(
-                      child: Text(
-                        'F',
-                        style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.white),
+                    child: ClipOval(
+                      child: Image.asset(
+                        'assets/images/farmer_avatar.png',
+                        width: 56,
+                        height: 56,
+                        fit: BoxFit.cover,
+                        errorBuilder: (context, error, stackTrace) => const Center(
+                          child: Text(
+                            'F',
+                            style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.white),
+                          ),
+                        ),
                       ),
                     ),
                   ),
@@ -598,6 +637,22 @@ class _ProfilScreenState extends State<ProfilScreen> {
         const SizedBox(height: 16),
       ],
     );
+
+    if (canPop) {
+      return Scaffold(
+        backgroundColor: AppColors.background,
+        body: SafeArea(
+          child: Center(
+            child: ConstrainedBox(
+              constraints: const BoxConstraints(maxWidth: 480),
+              child: content,
+            ),
+          ),
+        ),
+      );
+    }
+
+    return content;
   }
 
   Widget _buildSectionHeader(String title) {

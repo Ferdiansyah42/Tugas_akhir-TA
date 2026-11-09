@@ -99,20 +99,26 @@ class InputScreen extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Row(
-                    children: [
-                      const Icon(Icons.calendar_month, color: AppColors.primary, size: 18),
-                      const SizedBox(width: 6),
-                      Text(
-                        'Umur Ayam: ${inputAge.round()} Hari',
-                        style: const TextStyle(
-                          fontSize: 14,
-                          fontWeight: FontWeight.bold,
-                          color: AppColors.textHeadline,
+                  Expanded(
+                    child: Row(
+                      children: [
+                        const Icon(Icons.calendar_month, color: AppColors.primary, size: 18),
+                        const SizedBox(width: 6),
+                        Flexible(
+                          child: Text(
+                            'Umur: ${inputAge.round()} Hari',
+                            overflow: TextOverflow.ellipsis,
+                            style: const TextStyle(
+                              fontSize: 14,
+                              fontWeight: FontWeight.bold,
+                              color: AppColors.textHeadline,
+                            ),
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
+                  const SizedBox(width: 6),
                   Container(
                     padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
                     decoration: BoxDecoration(
@@ -150,10 +156,14 @@ class InputScreen extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Text(
-                      'Suhu Acuan Cobb 500 / Ross 308:',
-                      style: TextStyle(fontSize: 11, color: AppColors.textBody),
+                    const Expanded(
+                      child: Text(
+                        'Target Cobb 500 / Ross 308:',
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(fontSize: 11, color: AppColors.textBody),
+                      ),
                     ),
+                    const SizedBox(width: 8),
                     Text(
                       '${targetTemp.toStringAsFixed(1)}°C',
                       style: const TextStyle(
@@ -171,20 +181,26 @@ class InputScreen extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Row(
-                    children: [
-                      const Icon(Icons.device_thermostat, color: AppColors.warningButton, size: 18),
-                      const SizedBox(width: 6),
-                      Text(
-                        'Suhu Ruangan: ${inputTemp.toStringAsFixed(1)}°C',
-                        style: const TextStyle(
-                          fontSize: 14,
-                          fontWeight: FontWeight.bold,
-                          color: AppColors.textHeadline,
+                  Expanded(
+                    child: Row(
+                      children: [
+                        const Icon(Icons.device_thermostat, color: AppColors.warningButton, size: 18),
+                        const SizedBox(width: 6),
+                        Flexible(
+                          child: Text(
+                            'Suhu: ${inputTemp.toStringAsFixed(1)}°C',
+                            overflow: TextOverflow.ellipsis,
+                            style: const TextStyle(
+                              fontSize: 14,
+                              fontWeight: FontWeight.bold,
+                              color: AppColors.textHeadline,
+                            ),
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
+                  const SizedBox(width: 6),
                   Container(
                     padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
                     decoration: BoxDecoration(
@@ -216,20 +232,26 @@ class InputScreen extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Row(
-                    children: [
-                      const Icon(Icons.water_drop, color: AppColors.primary, size: 18),
-                      const SizedBox(width: 6),
-                      Text(
-                        'Kelembaban Udara: ${inputRh.round()}%',
-                        style: const TextStyle(
-                          fontSize: 14,
-                          fontWeight: FontWeight.bold,
-                          color: AppColors.textHeadline,
+                  Expanded(
+                    child: Row(
+                      children: [
+                        const Icon(Icons.water_drop, color: AppColors.primary, size: 18),
+                        const SizedBox(width: 6),
+                        Flexible(
+                          child: Text(
+                            'Kelembaban: ${inputRh.round()}%',
+                            overflow: TextOverflow.ellipsis,
+                            style: const TextStyle(
+                              fontSize: 14,
+                              fontWeight: FontWeight.bold,
+                              color: AppColors.textHeadline,
+                            ),
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
+                  const SizedBox(width: 6),
                   Container(
                     padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
                     decoration: BoxDecoration(

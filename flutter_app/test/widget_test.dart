@@ -1,5 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_app/main.dart';
+import 'package:flutter/material.dart';
 
 void main() {
   testWidgets('FuzzyBroilerApp smoke test', (WidgetTester tester) async {
@@ -12,10 +13,21 @@ void main() {
     expect(find.text('STATUS KANDANG SAAT INI'), findsOneWidget);
     expect(find.textContaining('KONDISI'), findsWidgets);
 
-    // Verifikasi navigasi ke tab Profil & Pengaturan
-    await tester.tap(find.text('Profil'));
+    // Verifikasi navigasi 4 Tab Bersih di Bottom Bar
+    expect(find.text('Beranda'), findsWidgets);
+    expect(find.text('Evaluasi'), findsOneWidget);
+    expect(find.text('Solusi'), findsOneWidget);
+    expect(find.text('Riwayat'), findsOneWidget);
+
+    // Verifikasi tab Evaluasi terpadu
+    await tester.tap(find.text('Evaluasi'));
     await tester.pumpAndSettle();
-    expect(find.text('Profil & Pengaturan'), findsWidgets);
+    expect(find.text('Form Input'), findsOneWidget);
+    expect(find.text('Hasil Inferensi'), findsOneWidget);
+
+    // Verifikasi buka Profil & Pengaturan via avatar
+    await tester.tap(find.byIcon(Icons.person));
+    await tester.pumpAndSettle();
     expect(find.text('Ferdiansyah'), findsOneWidget);
   });
 }

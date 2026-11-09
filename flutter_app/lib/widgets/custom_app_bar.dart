@@ -22,11 +22,9 @@ class CustomAppBar extends StatelessWidget {
 
   static const List<String> tabTitles = [
     'Beranda',
-    'Input Evaluasi',
-    'Hasil Inferensi',
-    'Solusi Kandang',
-    'Riwayat & Tren',
-    'Profil & Pengaturan',
+    'Evaluasi Mikroklimat',
+    'Solusi Tindakan Kandang',
+    'Riwayat & Tren Skor',
   ];
 
   @override
@@ -45,14 +43,20 @@ class CustomAppBar extends StatelessWidget {
               Expanded(
                 child: Row(
                   children: [
-                    Container(
-                      width: 34,
-                      height: 34,
-                      decoration: BoxDecoration(
-                        color: AppColors.primary,
-                        borderRadius: BorderRadius.circular(8),
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(8),
+                      child: Image.asset(
+                        'assets/images/smart_farm_icon.png',
+                        width: 34,
+                        height: 34,
+                        fit: BoxFit.cover,
+                        errorBuilder: (context, error, stackTrace) => Container(
+                          width: 34,
+                          height: 34,
+                          color: AppColors.primary,
+                          child: const Icon(Icons.cruelty_free, color: Colors.white, size: 20),
+                        ),
                       ),
-                      child: const Icon(Icons.cruelty_free, color: Colors.white, size: 20),
                     ),
                     const SizedBox(width: 8),
                     Expanded(
@@ -125,14 +129,22 @@ class CustomAppBar extends StatelessWidget {
                   InkWell(
                     onTap: onProfileTap,
                     borderRadius: BorderRadius.circular(16),
-                    child: Container(
-                      width: 32,
-                      height: 32,
-                      decoration: const BoxDecoration(
-                        color: AppColors.primary,
-                        shape: BoxShape.circle,
+                    child: ClipOval(
+                      child: Image.asset(
+                        'assets/images/farmer_avatar.png',
+                        width: 32,
+                        height: 32,
+                        fit: BoxFit.cover,
+                        errorBuilder: (context, error, stackTrace) => Container(
+                          width: 32,
+                          height: 32,
+                          decoration: const BoxDecoration(
+                            color: AppColors.primary,
+                            shape: BoxShape.circle,
+                          ),
+                          child: const Icon(Icons.person, color: Colors.white, size: 18),
+                        ),
                       ),
-                      child: const Icon(Icons.person, color: Colors.white, size: 18),
                     ),
                   ),
                 ],

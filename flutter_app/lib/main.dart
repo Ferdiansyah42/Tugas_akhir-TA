@@ -4,8 +4,7 @@ import 'core/app_constants.dart';
 import 'fuzzy/fuzzy_engine.dart';
 import 'widgets/custom_app_bar.dart';
 import 'screens/beranda_screen.dart';
-import 'screens/input_screen.dart';
-import 'screens/hasil_screen.dart';
+import 'screens/evaluasi_screen.dart';
 import 'screens/solusi_screen.dart';
 import 'screens/riwayat_screen.dart';
 import 'screens/profil_screen.dart';
@@ -37,7 +36,7 @@ class FuzzyBroilerApp extends StatelessWidget {
   }
 }
 
-/// Layar Utama dengan Navigasi 5 Tab Bottom Bar
+/// Layar Utama dengan Navigasi 4 Tab Bersih & Nyaman
 class MainNavigationScreen extends StatefulWidget {
   const MainNavigationScreen({super.key});
 
@@ -47,6 +46,7 @@ class MainNavigationScreen extends StatefulWidget {
 
 class _MainNavigationScreenState extends State<MainNavigationScreen> {
   int _currentIndex = 0;
+  int _evaluasiSubTabIndex = 0; // 0: Input, 1: Hasil
   final FuzzyBroilerEngine _engine = FuzzyBroilerEngine();
 
   // Evaluasi aktif & arsip riwayat
@@ -59,7 +59,7 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
   // State Checklist Solusi Interaktif
   final Map<String, bool> _completedActions = {};
 
-  // Form Controller untuk Tab Input
+  // Form Controller untuk Evaluasi
   double _inputAge = 21;
   double _inputTemp = 28.8;
   double _inputRh = 68;
@@ -134,7 +134,8 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
       for (final action in newEval.recommendationDetails) {
         _completedActions[action.title] = false;
       }
-      _currentIndex = 2; // Otomatis pindah ke Tab Hasil
+      _currentIndex = 1; // Pindah ke tab Evaluasi
+      _evaluasiSubTabIndex = 1; // Langsung tampilkan sub-tab Hasil
     });
 
     ScaffoldMessenger.of(context).showSnackBar(
@@ -147,7 +148,27 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
         action: SnackBarAction(
           label: 'LIHAT SOLUSI',
           textColor: AppColors.primaryFixed,
-          onPressed: () => setState(() => _currentIndex = 3),
+          onPressed: () => setState(() => _currentIndex = 2),
+        ),
+      ),
+    );
+  }
+
+  void _openProfileScreen() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => ProfilScreen(
+          selectedFlock: _selectedFlock,
+          onFlockChanged: (val) {
+            setState(() => _selectedFlock = val);
+          },
+          onResetData: () {
+            setState(() {
+              _history.clear();
+              _initSampleData();
+            });
+          },
         ),
       ),
     );
@@ -162,12 +183,12 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
             constraints: const BoxConstraints(maxWidth: 480), // Tampilan responsif mobile
             child: Column(
               children: [
-                // 1. Top App Bar Profesional
+                // 1. Top App Bar Profesional (Avatar profil di pojok kanan atas)
                 CustomAppBar(
                   currentIndex: _currentIndex,
                   selectedFlock: _selectedFlock,
                   currentAge: _currentEvaluation.age,
-                  onProfileTap: () => setState(() => _currentIndex = 5),
+                  onProfileTap: _openProfileScreen,
                   onFlockSelected: (val) {
                     setState(() => _selectedFlock = val);
                     ScaffoldMessenger.of(context).showSnackBar(
@@ -176,7 +197,7 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
                   },
                 ),
 
-                // 2. Konten Layar Tab Aktif
+                // 2. Konten Layar 4 Tab Utama
                 Expanded(
                   child: IndexedStack(
                     index: _currentIndex,
@@ -187,31 +208,35 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
                         selectedFlock: _selectedFlock,
                         showEarlyWarning: _showEarlyWarning,
                         onDismissEarlyWarning: () => setState(() => _showEarlyWarning = false),
-                        onNavigateToInput: () => setState(() => _currentIndex = 1),
-                        onNavigateToHasil: () => setState(() => _currentIndex = 2),
-                        onNavigateToSolusi: () => setState(() => _currentIndex = 3),
+                        onNavigateToInput: () => setState(() {
+                          _currentIndex = 1;
+                          _evaluasiSubTabIndex = 0;
+                        }),
+                        onNavigateToHasil: () => setState(() {
+                          _currentIndex = 1;
+                          _evaluasiSubTabIndex = 1;
+                        }),
+                        onNavigateToSolusi: () => setState(() => _currentIndex = 2),
+                        onNavigateToProfil: _openProfileScreen,
                       ),
 
-                      // Tab 1: Input Evaluasi
-                      InputScreen(
+                      // Tab 1: Evaluasi Terpadu (Input & Hasil Komparasi Fuzzy)
+                      EvaluasiScreen(
                         inputAge: _inputAge,
                         inputTemp: _inputTemp,
                         inputRh: _inputRh,
                         engine: _engine,
+                        currentEvaluation: _currentEvaluation,
+                        initialSubTabIndex: _evaluasiSubTabIndex,
                         onAgeChanged: (val) => setState(() => _inputAge = val),
                         onTempChanged: (val) => setState(() => _inputTemp = val),
                         onRhChanged: (val) => setState(() => _inputRh = val),
                         onApplyPreset: _applyPreset,
                         onRunEvaluation: _runEvaluation,
+                        onNavigateToSolusi: () => setState(() => _currentIndex = 2),
                       ),
 
-                      // Tab 2: Hasil Inferensi
-                      HasilScreen(
-                        currentEvaluation: _currentEvaluation,
-                        onNavigateToSolusi: () => setState(() => _currentIndex = 3),
-                      ),
-
-                      // Tab 3: Solusi SOP Kandang
+                      // Tab 2: Solusi SOP Tindakan Kandang
                       SolusiScreen(
                         currentEvaluation: _currentEvaluation,
                         completedActions: _completedActions,
@@ -222,7 +247,7 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
                         },
                       ),
 
-                      // Tab 4: Riwayat & Tren
+                      // Tab 3: Riwayat & Tren Historis
                       RiwayatScreen(
                         history: _history,
                         historyFilter: _historyFilter,
@@ -239,21 +264,7 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
                         onSelectEvaluation: (eval) {
                           setState(() {
                             _currentEvaluation = eval;
-                            _currentIndex = 3; // Buka tab solusi
-                          });
-                        },
-                      ),
-
-                      // Tab 5: Profil & Pengaturan
-                      ProfilScreen(
-                        selectedFlock: _selectedFlock,
-                        onFlockChanged: (val) {
-                          setState(() => _selectedFlock = val);
-                        },
-                        onResetData: () {
-                          setState(() {
-                            _history.clear();
-                            _initSampleData();
+                            _currentIndex = 2; // Buka tab solusi
                           });
                         },
                       ),
@@ -261,7 +272,7 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
                   ),
                 ),
 
-                // 3. Bottom Navigation Bar Profesional
+                // 3. Bottom Navigation Bar Bersih & Lega (4 Tab)
                 _buildBottomNavigationBar(),
               ],
             ),
@@ -296,12 +307,7 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
           BottomNavigationBarItem(
             icon: Icon(Icons.tune_outlined),
             activeIcon: Icon(Icons.tune),
-            label: 'Input',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.analytics_outlined),
-            activeIcon: Icon(Icons.analytics),
-            label: 'Hasil',
+            label: 'Evaluasi',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.checklist_outlined),
@@ -312,11 +318,6 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
             icon: Icon(Icons.show_chart_outlined),
             activeIcon: Icon(Icons.show_chart),
             label: 'Riwayat',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person_outline),
-            activeIcon: Icon(Icons.person),
-            label: 'Profil',
           ),
         ],
       ),
