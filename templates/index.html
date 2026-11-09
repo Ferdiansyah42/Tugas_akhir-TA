@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport">
+  <meta content="mobile_tab" name="shell-type">
+  <title>FuzzyBroiler IP - Sistem Pendukung Keputusan</title>
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+  <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "primary": "#005c55",
+            "surface-bright": "#f8f9ff",
+            "tertiary-container": "#007952",
+            "on-tertiary-container": "#99ffcd",
+            "outline": "#6e7977",
+            "surface": "#f8f9ff",
+            "tertiary-fixed-dim": "#4edea3",
+            "surface-container-lowest": "#ffffff",
+            "primary-fixed-dim": "#80d5cb",
+            "surface-tint": "#006a63",
+            "primary-fixed": "#9cf2e8",
+            "background": "#f8f9ff",
+            "on-secondary-fixed-variant": "#144f4b",
+            "on-tertiary": "#ffffff",
+            "secondary": "#316763",
+            "on-secondary-container": "#376d69",
+            "inverse-on-surface": "#eaf1ff",
+            "secondary-fixed": "#b5ede7",
+            "on-error": "#ffffff",
+            "error": "#ba1a1a",
+            "outline-variant": "#bdc9c6",
+            "on-primary-container": "#a3faef",
+            "surface-variant": "#d3e4fe",
+            "on-tertiary-fixed": "#002113",
+            "surface-container-highest": "#d3e4fe",
+            "on-surface": "#0b1c30",
+            "surface-container": "#e5eeff",
+            "inverse-primary": "#80d5cb",
+            "error-container": "#ffdad6",
+            "surface-container-low": "#eff4ff",
+            "on-primary-fixed": "#00201d",
+            "on-error-container": "#93000a",
+            "secondary-container": "#b5ede7",
+            "on-background": "#0b1c30",
+            "inverse-surface": "#213145",
+            "primary-container": "#0f766e",
+            "on-primary": "#ffffff",
+            "on-secondary-fixed": "#00201e",
+            "surface-dim": "#cbdbf5",
+            "on-primary-fixed-variant": "#00504a",
+            "secondary-fixed-dim": "#9ad1cb",
+            "on-surface-variant": "#3e4947",
+            "surface-container-high": "#dce9ff",
+            "tertiary": "#005e3f",
+            "on-secondary": "#ffffff",
+            "tertiary-fixed": "#6ffbbe",
+            "on-tertiary-fixed-variant": "#005236"
+          },
+          borderRadius: {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          spacing: {
+            "gutter-sm": "0.75rem",
+            "margin-tablet": "1.5rem",
+            "space-lg": "1.5rem",
+            "gutter": "1rem",
+            "space-xs": "0.25rem",
+            "margin": "1rem",
+            "space-xl": "2rem",
+            "space-md": "1rem",
+            "space-sm": "0.5rem"
+          },
+          fontFamily: {
+            "headline-sm": ["Hanken Grotesk", "sans-serif"],
+            "label-md": ["JetBrains Mono", "monospace"],
+            "body-sm": ["Hanken Grotesk", "sans-serif"],
+            "headline-md": ["Hanken Grotesk", "sans-serif"],
+            "body-md": ["Hanken Grotesk", "sans-serif"],
+            "metric-xl": ["JetBrains Mono", "monospace"],
+            "headline-lg": ["Hanken Grotesk", "sans-serif"],
+            "metric-lg": ["JetBrains Mono", "monospace"],
+            "label-sm": ["JetBrains Mono", "monospace"],
+            "display-lg": ["Hanken Grotesk", "sans-serif"],
+            "display-lg-mobile": ["Hanken Grotesk", "sans-serif"],
+            "body-lg": ["Hanken Grotesk", "sans-serif"]
+          },
+          fontSize: {
+            "headline-sm": ["18px", {"lineHeight": "24px", "fontWeight": "600"}],
+            "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.04em", "fontWeight": "500"}],
+            "body-sm": ["12px", {"lineHeight": "16px", "fontWeight": "400"}],
+            "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+            "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+            "metric-xl": ["32px", {"lineHeight": "36px", "letterSpacing": "-0.03em", "fontWeight": "700"}],
+            "headline-lg": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+            "metric-lg": ["22px", {"lineHeight": "28px", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+            "label-sm": ["10px", {"lineHeight": "14px", "letterSpacing": "0.06em", "fontWeight": "500"}],
+            "display-lg": ["36px", {"lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+            "display-lg-mobile": ["28px", {"lineHeight": "34px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+            "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    @layer base {
+      html, body {
+        width: 100vw;
+        margin: 0;
+        padding: 0;
+        background-color: #f8f9ff;
+      }
+      body {
+        overscroll-behavior: none;
+      }
+      .pb-safe { padding-bottom: env(safe-area-inset-bottom, 0px); }
+      .pt-safe { padding-top: env(safe-area-inset-top, 0px); }
+    }
+    ::-webkit-scrollbar { display: none; }
+    .tab-content { display: none; }
+    .tab-content.active { display: flex; }
+  </style>
+</head>
+
+<body class="bg-surface text-on-surface font-body-md min-h-screen flex flex-col antialiased selection:bg-secondary-container">
+  
+  <!-- Outer Mobile Responsive Wrapper (max-w-md on desktop, full on mobile) -->
+  <div class="w-full max-w-md mx-auto min-h-screen flex flex-col relative shadow-2xl bg-surface">
+
+    <!-- Top App Header -->
+    <header class="sticky top-0 w-full z-50 pt-safe bg-surface/95 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)]">
+      <div class="h-20 px-gutter flex flex-col justify-center gap-space-xs">
+        <div class="flex items-center justify-between gap-space-sm">
+          <div class="flex items-center gap-space-sm min-w-0">
+            <!-- App Icon / Logo -->
+            <div class="w-8 h-8 rounded-lg bg-primary flex items-center justify-center text-white shrink-0 shadow-xs">
+              <span class="material-symbols-outlined text-[20px]">cruelty_free</span>
+            </div>
+            <div class="flex flex-col min-w-0">
+              <div class="flex items-center gap-space-xs">
+                <span class="font-headline-sm text-headline-sm text-primary font-bold tracking-tight truncate">FuzzyBroiler IP</span>
+                <span class="font-label-sm text-label-sm bg-secondary-container text-on-secondary-container px-space-xs py-0.5 rounded-full uppercase shrink-0 font-bold">Python DSS</span>
+              </div>
+              <span class="font-body-sm text-body-sm text-on-surface-variant truncate" id="top-current-tab-label">Beranda</span>
+            </div>
+          </div>
+          <div class="flex items-center gap-space-sm shrink-0">
+            <div class="flex items-center gap-1.5 px-space-sm py-1 rounded-full bg-surface-container text-on-surface-variant font-label-sm text-label-sm">
+              <span class="w-2 h-2 rounded-full bg-tertiary-container animate-pulse"></span>
+              <span class="hidden xs:inline">Offline</span>
+              <span class="material-symbols-outlined text-[14px]">cloud_off</span>
+            </div>
+            <div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center shrink-0 cursor-pointer" title="Peternak / Pengguna">
+              <span class="material-symbols-outlined text-on-primary text-[18px]">person</span>
+            </div>
+          </div>
+        </div>
+        <div class="flex items-center justify-between font-label-sm text-label-sm text-on-surface-variant px-space-xs">
+          <div class="flex items-center gap-space-xs">
+            <span class="material-symbols-outlined text-[16px] text-primary">cottage</span>
+            <span class="font-medium text-on-surface truncate" id="top-flock-badge">{{ latest.flock_name }} (Hari ke-{{ latest.age }})</span>
+          </div>
+          <div class="flex items-center gap-space-xs font-label-sm text-label-sm text-tertiary font-medium">
+            <span class="w-2 h-2 rounded-full bg-tertiary-container animate-pulse"></span>
+            <span>Siap Pakai Tanpa Kuota</span>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content Body -->
+    <main class="flex-1 flex flex-col relative w-full pb-24 bg-surface">
+
+      <!-- ================= TAB 1: BERANDA ================= -->
+      <section id="tab-beranda" class="tab-content active flex-col w-full px-margin pt-4 pb-space-lg gap-space-md">
+
+        <!-- Early Warning Alert Banner (Dismissible / Actionable) -->
+        {% if latest.warning_flag %}
+        <div class="w-full rounded-xl bg-amber-50 text-amber-950 p-space-md shadow-sm transition-all duration-300 relative overflow-hidden" id="early-warning-banner">
+          <div class="flex items-start gap-space-sm">
+            <div class="w-9 h-9 rounded-full bg-amber-100 flex items-center justify-center shrink-0 mt-0.5 text-amber-700">
+              <span class="material-symbols-outlined text-[22px]" style="font-variation-settings: 'FILL' 1;">lightbulb</span>
+            </div>
+            <div class="flex flex-col min-w-0 flex-1">
+              <div class="flex items-center justify-between gap-space-xs">
+                <span class="font-headline-sm text-headline-sm text-amber-900 tracking-tight font-bold">Perhatian untuk Kandang</span>
+                <span class="font-label-sm text-label-sm bg-amber-200/70 text-amber-800 px-space-xs py-0.5 rounded-full font-semibold shrink-0">Perlu Cek</span>
+              </div>
+              <p class="font-body-sm text-body-sm text-amber-950 mt-1 leading-snug">
+                {{ latest.warning_message or "Suhu agak sedikit naik dalam 2 hari ini. Yuk cek ventilasi dan sirkulasi angin agar ayam tetap nyaman." }}
+              </p>
+              <div class="flex items-center gap-space-sm mt-space-sm">
+                <button onclick="switchTab('solusi')" class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-amber-600 text-white font-label-md text-label-md font-semibold shadow-xs hover:bg-amber-700 active:scale-95 transition-all" type="button">
+                  <span class="material-symbols-outlined text-[16px]">check_circle</span>
+                  <span>Lihat Cara Penanganan</span>
+                </button>
+                <button class="inline-flex items-center px-2 py-1.5 rounded-lg text-amber-800 font-label-md text-label-md hover:bg-amber-100 transition-colors" onclick="document.getElementById('early-warning-banner').style.display='none'" type="button">
+                  Nanti Saja
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endif %}
+
+        <!-- Hero Score & Fuzzy Engine Analytics Card -->
+        <div class="w-full rounded-xl bg-surface-container-lowest shadow-sm p-space-md flex flex-col gap-space-sm relative overflow-hidden cursor-pointer" onclick="switchTab('hasil')">
+          <div class="absolute -right-10 -top-10 w-36 h-36 rounded-full bg-emerald-50 blur-2xl pointer-events-none"></div>
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-space-xs">
+              <span class="material-symbols-outlined text-tertiary-container text-[22px]">sentiment_very_satisfied</span>
+              <span class="font-label-md text-label-md uppercase tracking-wider text-on-surface-variant font-bold">Status Kandang Saat Ini</span>
+            </div>
+            <span class="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-emerald-50 text-emerald-800 font-label-md text-label-md font-bold">
+              <span class="w-2 h-2 rounded-full bg-emerald-600"></span>
+              Kondisi Ayam: Sangat Baik
+            </span>
+          </div>
+
+          <div class="flex items-center justify-between mt-space-xs">
+            <div class="flex flex-col">
+              <span class="font-headline-lg text-headline-lg text-primary font-bold tracking-tight" id="hero-condition-title">{{ latest.condition_title }}</span>
+              <span class="font-body-sm text-body-sm text-on-surface-variant mt-0.5" id="hero-condition-subtitle">Pertumbuhan ayam berjalan optimal</span>
+            </div>
+            <div class="text-right flex flex-col items-end bg-surface-container-low px-3 py-1.5 rounded-xl border border-secondary-container">
+              <span class="font-label-sm text-label-sm text-on-surface-variant font-medium">Nilai Kesehatan</span>
+              <div class="flex items-baseline gap-0.5">
+                <span class="font-metric-xl text-metric-xl text-primary font-bold" id="hero-score-val">{{ "%.0f"|format(latest.score_mamdani) }}</span>
+                <span class="font-body-md text-body-md text-on-surface-variant font-semibold">/100</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Progress Bar -->
+          <div class="w-full bg-surface-container h-2.5 rounded-full overflow-hidden flex mt-1">
+            <div class="bg-emerald-600 h-full rounded-full transition-all duration-700" id="hero-progress-bar" style="width: {{ latest.score_mamdani }}%;"></div>
+          </div>
+
+          <div class="mt-space-xs pt-space-xs bg-surface-container-low rounded-lg p-space-sm flex items-center justify-between text-on-surface-variant font-label-sm text-label-sm">
+            <div class="flex items-center gap-1.5 font-medium text-on-surface">
+              <span class="material-symbols-outlined text-[18px] text-tertiary-container">thumb_up</span>
+              <span>Prediksi Panen: <strong>Sangat Memuaskan</strong></span>
+            </div>
+            <span class="text-tertiary font-medium bg-emerald-50 text-emerald-800 px-2 py-0.5 rounded-full">Aman & Nyaman</span>
+          </div>
+        </div>
+
+        <!-- Micro-Climate Telemetry 3-Grid -->
+        <div class="flex flex-col gap-space-xs">
+          <div class="flex items-center justify-between px-space-xs">
+            <h2 class="font-headline-sm text-headline-sm text-on-surface font-semibold tracking-tight">Kondisi Ruangan Kandang Hari Ini</h2>
+            <span class="font-label-sm text-label-sm text-tertiary-container font-medium flex items-center gap-0.5">
+              <span class="material-symbols-outlined text-[15px]">check_circle</span> Terpantau Bagus
+            </span>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-space-sm">
+            <!-- Age Card -->
+            <div class="rounded-xl bg-surface-container-lowest p-space-md shadow-sm flex flex-col justify-between border-l-4 border-primary">
+              <div class="flex items-center justify-between">
+                <span class="font-label-sm text-label-sm text-on-surface-variant uppercase font-medium">Umur Ayam</span>
+                <span class="material-symbols-outlined text-primary text-[22px]">calendar_month</span>
+              </div>
+              <div class="my-space-xs">
+                <span class="font-metric-lg text-metric-lg text-on-surface font-bold" id="grid-age-val">{{ latest.age }}</span>
+                <span class="font-label-md text-label-md text-on-surface-variant ml-1">Hari</span>
+              </div>
+              <div>
+                <span class="inline-flex items-center px-2 py-0.5 rounded-full bg-secondary-container text-on-secondary-container font-label-sm text-label-sm font-semibold truncate" id="grid-phase-val">
+                  {% if latest.age <= 14 %}Ayam Starter (Brooding){% elif latest.age <= 28 %}Ayam Remaja (Grower){% else %}Ayam Dewasa (Finisher){% endif %}
+                </span>
+              </div>
+            </div>
+
+            <!-- Temperature Card -->
+            <div class="rounded-xl bg-surface-container-lowest p-space-md shadow-sm flex flex-col justify-between border-l-4 border-amber-500">
+              <div class="flex items-center justify-between">
+                <span class="font-label-sm text-label-sm text-on-surface-variant uppercase font-medium">Suhu Ruangan</span>
+                <span class="material-symbols-outlined text-amber-600 text-[22px]">device_thermostat</span>
+              </div>
+              <div class="my-space-xs">
+                <span class="font-metric-lg text-metric-lg text-amber-700 font-bold" id="grid-temp-val">{{ "%.1f"|format(latest.temperature) }}</span>
+                <span class="font-label-md text-label-md text-amber-700 ml-0.5">°C</span>
+              </div>
+              <div class="flex flex-col gap-0.5">
+                <div class="flex justify-between font-label-sm text-label-sm text-on-surface-variant">
+                  <span id="grid-target-temp">Target: {{ "%.0f"|format(latest.target_temp) }}°C</span>
+                </div>
+                <span class="inline-flex items-center gap-1 mt-1 px-2 py-0.5 rounded-full bg-amber-50 text-amber-800 font-label-sm text-label-sm font-medium">
+                  <span class="w-1.5 h-1.5 rounded-full bg-amber-500"></span>Agak Hangat, Masih Aman
+                </span>
+              </div>
+            </div>
+
+            <!-- Humidity Card -->
+            <div class="rounded-xl bg-surface-container-lowest p-space-md shadow-sm flex flex-col justify-between border-l-4 border-emerald-600">
+              <div class="flex items-center justify-between">
+                <span class="font-label-sm text-label-sm text-on-surface-variant uppercase font-medium">Kelembaban Udara</span>
+                <span class="material-symbols-outlined text-primary text-[22px]">water_drop</span>
+              </div>
+              <div class="my-space-xs">
+                <span class="font-metric-lg text-metric-lg text-on-surface font-bold" id="grid-rh-val">{{ "%.0f"|format(latest.humidity) }}</span>
+                <span class="font-label-md text-label-md text-on-surface-variant ml-0.5">%</span>
+              </div>
+              <div class="flex flex-col gap-0.5">
+                <div class="flex justify-between font-label-sm text-label-sm text-on-surface-variant">
+                  <span>Rentang Pas: 60 - 70%</span>
+                </div>
+                <span class="inline-flex items-center gap-1 mt-1 px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-800 font-label-sm text-label-sm font-medium">
+                  <span class="w-1.5 h-1.5 rounded-full bg-emerald-600"></span>Pas & Nyaman untuk Ayam
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Priority Actionable Recommendation Widget -->
+        <div class="w-full rounded-xl bg-primary text-on-primary p-space-md shadow-sm flex flex-col gap-space-sm relative overflow-hidden">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-space-xs">
+              <span class="material-symbols-outlined text-[22px] text-primary-fixed">tips_and_updates</span>
+              <span class="font-headline-sm text-headline-sm font-bold tracking-tight text-white">Langkah Penting Hari Ini</span>
+            </div>
+            <span class="px-2.5 py-0.5 rounded-full bg-white/20 text-on-primary font-label-sm text-label-sm font-semibold tracking-wider">Perlu Dilakukan</span>
+          </div>
+
+          <div class="bg-primary-container/80 rounded-lg p-space-sm text-on-primary-container flex items-start gap-space-sm">
+            <div class="w-8 h-8 rounded-full bg-primary-fixed-dim/30 flex items-center justify-center shrink-0 text-white mt-0.5">
+              <span class="material-symbols-outlined text-[18px]">mode_fan</span>
+            </div>
+            <p class="font-body-md text-body-md text-white font-medium leading-relaxed" id="rec-summary-text">
+              {{ latest.recommendation_summary }}
+            </p>
+          </div>
+
+          <div class="flex items-center justify-between text-on-primary font-label-sm text-label-sm pt-0.5 opacity-90">
+            <span>Saran otomatis berdasarkan cuaca kandang</span>
+            <button onclick="switchTab('solusi')" class="inline-flex items-center gap-1 font-semibold text-primary-fixed hover:underline bg-white/10 px-2.5 py-1 rounded-lg">
+              <span>Lihat Cara Penanganan</span>
+              <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Active Flock & House Overview Card -->
+        <div class="w-full rounded-xl bg-surface-container-lowest p-space-md shadow-sm flex flex-col gap-space-sm">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-space-xs">
+              <span class="material-symbols-outlined text-primary text-[20px]">domain</span>
+              <h3 class="font-headline-sm text-headline-sm text-on-surface font-semibold">Siklus Kandang Aktif</h3>
+            </div>
+            <span class="font-label-sm text-label-sm text-tertiary-container font-semibold bg-tertiary-fixed/30 px-2 py-0.5 rounded-full">Siklus Berjalan</span>
+          </div>
+
+          <div class="flex flex-col sm:flex-row gap-space-sm items-center">
+            <div class="w-full sm:w-28 h-24 rounded-lg bg-cover bg-center shrink-0 relative overflow-hidden bg-emerald-950 flex items-end p-2 border border-secondary-container">
+              <div class="w-full flex items-center justify-between text-white">
+                <span class="font-label-sm text-label-sm bg-primary/80 px-1.5 py-0.5 rounded">CH-01</span>
+                <span class="material-symbols-outlined text-[18px] text-primary-fixed">warehouse</span>
+              </div>
+            </div>
+
+            <div class="flex flex-col w-full justify-between gap-1.5">
+              <div class="font-body-md text-body-md font-bold text-on-surface">Kandang Broiler Closed House 01</div>
+              <div class="grid grid-cols-2 gap-space-xs font-label-sm text-label-sm text-on-surface-variant">
+                <div class="flex items-center gap-1">
+                  <span class="material-symbols-outlined text-[16px] text-secondary">egg</span>
+                  <span>Strain: <strong class="text-on-surface">Cobb 500</strong></span>
+                </div>
+                <div class="flex items-center gap-1">
+                  <span class="material-symbols-outlined text-[16px] text-secondary">groups</span>
+                  <span>Populasi: <strong class="text-on-surface">10.000 Ekor</strong></span>
+                </div>
+                <div class="flex items-center gap-1">
+                  <span class="material-symbols-outlined text-[16px] text-secondary">timer</span>
+                  <span>Panen: <strong class="text-tertiary-container">{{ 42 - latest.age }} Hari Lagi</strong></span>
+                </div>
+                <div class="flex items-center gap-1">
+                  <span class="material-symbols-outlined text-[16px] text-secondary">verified</span>
+                  <span>Sertifikasi: SNI Broiler</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Primary Floating / Large CTA Trigger -->
+        <div class="w-full pt-space-xs">
+          <button onclick="switchTab('input')" class="w-full min-h-[48px] py-4 px-space-md rounded-xl bg-primary hover:bg-primary-container text-white shadow-md flex items-center justify-center gap-space-sm font-headline-sm text-headline-sm font-bold tracking-wide active:scale-[0.99] transition-all">
+            <span class="material-symbols-outlined text-[26px]">add_circle</span>
+            <span>➕ Cek Kondisi Kandang Hari Ini</span>
+          </button>
+          <p class="text-center font-body-sm text-body-sm text-on-surface-variant mt-2 font-medium">Bisa dipakai langsung kapan saja • Tanpa butuh kuota internet</p>
+        </div>
+
+      </section>
+
+      <!-- ================= TAB 2: INPUT EVALUASI ================= -->
+      <section id="tab-input" class="tab-content flex-col w-full px-margin pt-4 pb-space-lg gap-space-md">
+        <div class="flex items-center justify-between">
+          <div>
+            <h2 class="font-headline-lg text-headline-lg text-primary font-bold">Input Evaluasi Kandang</h2>
+            <p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">Mesin Fuzzy adaptif akan menghitung deviasi suhu otomatis</p>
+          </div>
+          <span class="material-symbols-outlined text-primary text-[32px]">tune</span>
+        </div>
+
+        <!-- Form Card -->
+        <form id="evalForm" onsubmit="handleEvaluationSubmit(event)" class="rounded-xl bg-surface-container-lowest p-space-md shadow-sm flex flex-col gap-space-md">
+          
+          <!-- Umur Input -->
+          <div class="flex flex-col gap-1.5">
+            <div class="flex justify-between items-center">
+              <label class="font-label-md text-label-md font-semibold text-on-surface uppercase flex items-center gap-1">
+                <span class="material-symbols-outlined text-[18px] text-primary">calendar_month</span>
+                Umur Ayam (Hari)
+              </label>
+              <span id="detected-phase-badge" class="font-label-sm text-label-sm bg-secondary-container text-on-secondary-container px-2 py-0.5 rounded-full font-semibold">
+                Grower (15-28 Hari)
+              </span>
+            </div>
+            <input type="number" id="input_age" name="age" min="1" max="45" value="{{ latest.age }}" required
+              oninput="updateInputPreview()"
+              class="w-full px-4 py-3 rounded-lg border border-outline-variant bg-surface focus:outline-none focus:ring-2 focus:ring-primary font-metric-lg text-primary font-bold">
+            <p class="font-label-sm text-label-sm text-on-surface-variant">Rentang panen normal broiler: 0 s.d. 42 hari.</p>
+          </div>
+
+          <!-- Target Temp Guide Info Box -->
+          <div class="p-space-sm rounded-lg bg-surface-container-low border border-secondary-container flex items-center justify-between text-on-surface-variant font-label-sm text-label-sm">
+            <span class="flex items-center gap-1">
+              <span class="material-symbols-outlined text-[16px] text-primary">auto_graph</span>
+              Pedoman Strain Cobb 500:
+            </span>
+            <span class="font-bold text-primary" id="preview-target-temp">Suhu Target: 27.0°C</span>
+          </div>
+
+          <!-- Suhu Input -->
+          <div class="flex flex-col gap-1.5">
+            <div class="flex justify-between items-center">
+              <label class="font-label-md text-label-md font-semibold text-on-surface uppercase flex items-center gap-1">
+                <span class="material-symbols-outlined text-[18px] text-amber-600">device_thermostat</span>
+                Suhu Ruangan Aktual (°C)
+              </label>
+              <span id="preview-temp-dev" class="font-label-sm text-label-sm font-bold text-amber-700 bg-amber-50 px-2 py-0.5 rounded-full">
+                Deviasi: +1.8°C
+              </span>
+            </div>
+            <input type="number" step="0.1" id="input_temperature" name="temperature" min="15" max="45" value="{{ latest.temperature }}" required
+              oninput="updateInputPreview()"
+              class="w-full px-4 py-3 rounded-lg border border-outline-variant bg-surface focus:outline-none focus:ring-2 focus:ring-primary font-metric-lg text-amber-700 font-bold">
+            <p class="font-label-sm text-label-sm text-on-surface-variant">Masukkan suhu rata-rata dari termometer kandang.</p>
+          </div>
+
+          <!-- Kelembaban Input -->
+          <div class="flex flex-col gap-1.5">
+            <div class="flex justify-between items-center">
+              <label class="font-label-md text-label-md font-semibold text-on-surface uppercase flex items-center gap-1">
+                <span class="material-symbols-outlined text-[18px] text-primary">water_drop</span>
+                Kelembaban Udara (RH %)
+              </label>
+              <span id="preview-rh-status" class="font-label-sm text-label-sm font-bold text-emerald-800 bg-emerald-50 px-2 py-0.5 rounded-full">
+                Ideal (60-70%)
+              </span>
+            </div>
+            <input type="number" step="1" id="input_humidity" name="humidity" min="20" max="100" value="{{ "%.0f"|format(latest.humidity) }}" required
+              oninput="updateInputPreview()"
+              class="w-full px-4 py-3 rounded-lg border border-outline-variant bg-surface focus:outline-none focus:ring-2 focus:ring-primary font-metric-lg text-primary font-bold">
+            <p class="font-label-sm text-label-sm text-on-surface-variant">Kelembaban optimal ayam broiler berada di rentang 60% – 70%.</p>
+          </div>
+
+          <!-- Submit Button -->
+          <button type="submit" id="btnSubmitEval" class="w-full min-h-[48px] py-4 rounded-xl bg-primary hover:bg-primary-container text-white shadow-md flex items-center justify-center gap-space-sm font-headline-sm text-headline-sm font-bold tracking-wide active:scale-[0.99] transition-all mt-2">
+            <span class="material-symbols-outlined text-[24px]">psychology</span>
+            <span>Jalankan Inferensi Fuzzy</span>
+          </button>
+        </form>
+
+      </section>
+
+      <!-- ================= TAB 3: HASIL EVALUASI ================= -->
+      <section id="tab-hasil" class="tab-content flex-col w-full px-margin pt-4 pb-space-lg gap-space-md">
+        <div class="flex items-center justify-between">
+          <div>
+            <h2 class="font-headline-lg text-headline-lg text-primary font-bold">Hasil Evaluasi Fuzzy</h2>
+            <p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">Komparasi Metode Mamdani & Sugeno</p>
+          </div>
+          <span class="material-symbols-outlined text-primary text-[32px]">analytics</span>
+        </div>
+
+        <!-- Comparative Score Card -->
+        <div class="rounded-xl bg-surface-container-lowest p-space-md shadow-sm flex flex-col gap-space-md">
+          <div class="flex items-center justify-between border-b border-surface-container pb-space-sm">
+            <span class="font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant font-bold">Kategori Potensi IP</span>
+            <span class="px-3 py-1 rounded-full bg-emerald-50 text-emerald-800 font-label-md text-label-md font-bold" id="res-category-badge">
+              {{ latest.category }}
+            </span>
+          </div>
+
+          <div class="grid grid-cols-2 gap-space-sm">
+            <!-- Mamdani Result -->
+            <div class="p-space-sm rounded-xl bg-surface-container-low border border-primary/20 flex flex-col items-center text-center">
+              <span class="font-label-sm text-label-sm text-on-surface-variant font-semibold uppercase">Mamdani (Centroid)</span>
+              <span class="font-metric-xl text-metric-xl text-primary font-bold my-1" id="res-score-mamdani">{{ "%.1f"|format(latest.score_mamdani) }}</span>
+              <span class="font-label-sm text-label-sm text-tertiary">Skor Utama TA</span>
+            </div>
+
+            <!-- Sugeno Result -->
+            <div class="p-space-sm rounded-xl bg-surface-container-low border border-secondary-container flex flex-col items-center text-center">
+              <span class="font-label-sm text-label-sm text-on-surface-variant font-semibold uppercase">Sugeno (Weighted Avg)</span>
+              <span class="font-metric-xl text-metric-xl text-secondary font-bold my-1" id="res-score-sugeno">{{ "%.1f"|format(latest.score_sugeno) }}</span>
+              <span class="font-label-sm text-label-sm text-on-surface-variant">Model Pembanding</span>
+            </div>
+          </div>
+
+          <!-- Variable breakdown -->
+          <div class="flex flex-col gap-2 pt-2 border-t border-surface-container font-body-sm text-body-sm">
+            <div class="flex justify-between py-1 border-b border-surface-container-low">
+              <span class="text-on-surface-variant">Fase Biologis:</span>
+              <strong class="text-on-surface" id="res-phase-text">Ayam Remaja (Grower)</strong>
+            </div>
+            <div class="flex justify-between py-1 border-b border-surface-container-low">
+              <span class="text-on-surface-variant">Deviasi Suhu (ΔT):</span>
+              <strong class="text-amber-700" id="res-dev-text">{{ "+%.1f"|format(latest.temp_dev) }}°C (Target: {{ "%.0f"|format(latest.target_temp) }}°C)</strong>
+            </div>
+            <div class="flex justify-between py-1 border-b border-surface-container-low">
+              <span class="text-on-surface-variant">Status Kelembaban:</span>
+              <strong class="text-emerald-700" id="res-rh-text">{{ "%.0f"|format(latest.humidity) }}% (Ideal)</strong>
+            </div>
+            <div class="flex justify-between py-1">
+              <span class="text-on-surface-variant">Estimasi Indeks Performa (IP):</span>
+              <strong class="text-primary font-bold">> 380 (Sangat Bagus)</strong>
+            </div>
+          </div>
+
+          <button onclick="switchTab('solusi')" class="w-full py-3 rounded-lg bg-primary text-white font-label-md text-label-md font-semibold flex items-center justify-center gap-1 shadow-xs hover:bg-primary-container">
+            <span>Lihat Panduan Solusi Korektif</span>
+            <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+          </button>
+        </div>
+      </section>
+
+      <!-- ================= TAB 4: SOLUSI / REKOMENDASI ================= -->
+      <section id="tab-solusi" class="tab-content flex-col w-full px-margin pt-4 pb-space-lg gap-space-md">
+        <div class="flex items-center justify-between">
+          <div>
+            <h2 class="font-headline-lg text-headline-lg text-primary font-bold">Panduan Tindakan</h2>
+            <p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">Langkah prioritas penanganan kandang</p>
+          </div>
+          <span class="material-symbols-outlined text-primary text-[32px]">checklist</span>
+        </div>
+
+        <!-- Priority Action Banner -->
+        <div class="rounded-xl bg-primary text-on-primary p-space-md shadow-sm flex flex-col gap-space-xs">
+          <div class="flex items-center justify-between">
+            <span class="font-label-sm text-label-sm uppercase tracking-wider text-primary-fixed font-bold">Urgensi Tindakan</span>
+            <span class="bg-white/20 text-white font-label-sm text-label-sm px-2 py-0.5 rounded-full font-semibold" id="sol-priority-badge">
+              Perlu Dilakukan
+            </span>
+          </div>
+          <p class="font-body-md text-body-md font-medium text-white leading-relaxed mt-1" id="sol-summary-text">
+            {{ latest.recommendation_summary }}
+          </p>
+        </div>
+
+        <!-- Detailed Action Steps -->
+        <div class="flex flex-col gap-space-sm" id="sol-details-container">
+          {% for item in latest.recommendation_details %}
+          <div class="rounded-xl bg-surface-container-lowest p-space-md shadow-sm flex items-start gap-space-sm">
+            <div class="w-10 h-10 rounded-full bg-secondary-container flex items-center justify-center text-primary shrink-0 mt-0.5">
+              <span class="material-symbols-outlined text-[22px]">{{ item.icon }}</span>
+            </div>
+            <div class="flex flex-col flex-1">
+              <span class="font-headline-sm text-[16px] text-on-surface font-bold">{{ item.title }}</span>
+              <p class="font-body-sm text-body-sm text-on-surface-variant mt-1 leading-snug">{{ item.action }}</p>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </section>
+
+      <!-- ================= TAB 5: RIWAYAT EVALUASI ================= -->
+      <section id="tab-riwayat" class="tab-content flex-col w-full px-margin pt-4 pb-space-lg gap-space-md">
+        <div class="flex items-center justify-between">
+          <div>
+            <h2 class="font-headline-lg text-headline-lg text-primary font-bold">Riwayat Evaluasi</h2>
+            <p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">Database lokal SQLite (offline)</p>
+          </div>
+          <span class="material-symbols-outlined text-primary text-[32px]">monitoring</span>
+        </div>
+
+        <!-- History Items List -->
+        <div class="flex flex-col gap-space-sm" id="history-items-list">
+          {% for row in history %}
+          <div class="rounded-xl bg-surface-container-lowest p-space-md shadow-sm flex flex-col gap-space-xs border-l-4 {% if row.score_mamdani >= 75 %}border-emerald-600{% elif row.score_mamdani >= 50 %}border-amber-500{% else %}border-error{% endif %}">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-1.5">
+                <span class="font-headline-sm text-[16px] text-on-surface font-bold">Hari ke-{{ row.age }}</span>
+                <span class="font-label-sm text-label-sm bg-surface-container text-on-surface-variant px-1.5 py-0.5 rounded">
+                  {{ row.created_at[:16] }}
+                </span>
+              </div>
+              <div class="flex items-center gap-1">
+                <span class="font-metric-lg text-metric-lg font-bold text-primary">{{ "%.1f"|format(row.score_mamdani) }}</span>
+                <span class="font-label-sm text-label-sm text-on-surface-variant">/100</span>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-3 gap-1 py-1 font-label-sm text-label-sm text-on-surface-variant">
+              <div>Suhu: <strong class="text-on-surface">{{ "%.1f"|format(row.temperature) }}°C</strong></div>
+              <div>RH: <strong class="text-on-surface">{{ "%.0f"|format(row.humidity) }}%</strong></div>
+              <div>Target: <strong class="text-on-surface">{{ "%.0f"|format(row.target_temp) }}°C</strong></div>
+            </div>
+
+            <div class="text-body-sm text-body-sm text-on-surface-variant italic truncate mt-0.5">
+              "{{ row.recommendation_summary }}"
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </section>
+
+    </main>
+
+    <!-- Bottom Navigation Bar (Fixed 5 Tabs) -->
+    <nav class="fixed bottom-0 w-full max-w-md z-50 pb-safe bg-surface/95 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.06)] border-t border-surface-container">
+      <div class="h-16 px-gutter-sm flex items-center justify-around">
+        
+        <!-- Tab 1: Beranda -->
+        <button onclick="switchTab('beranda')" id="nav-beranda" class="nav-btn flex flex-col items-center justify-center min-w-[56px] min-h-[44px] gap-0.5 text-on-surface-variant group [&>.nav-pill]:bg-secondary-container [&>.nav-pill>.material-symbols-outlined]:text-on-secondary-container [&>span]:text-primary [&>span]:font-semibold">
+          <div class="nav-pill w-12 h-7 rounded-full flex items-center justify-center transition-colors">
+            <span class="material-symbols-outlined text-[20px]">dashboard</span>
+          </div>
+          <span class="font-label-sm text-label-sm">Beranda</span>
+        </button>
+
+        <!-- Tab 2: Input -->
+        <button onclick="switchTab('input')" id="nav-input" class="nav-btn flex flex-col items-center justify-center min-w-[56px] min-h-[44px] gap-0.5 text-on-surface-variant group">
+          <div class="nav-pill w-12 h-7 rounded-full flex items-center justify-center transition-colors">
+            <span class="material-symbols-outlined text-[20px]">tune</span>
+          </div>
+          <span class="font-label-sm text-label-sm">Input</span>
+        </button>
+
+        <!-- Tab 3: Hasil -->
+        <button onclick="switchTab('hasil')" id="nav-hasil" class="nav-btn flex flex-col items-center justify-center min-w-[56px] min-h-[44px] gap-0.5 text-on-surface-variant group">
+          <div class="nav-pill w-12 h-7 rounded-full flex items-center justify-center transition-colors">
+            <span class="material-symbols-outlined text-[20px]">analytics</span>
+          </div>
+          <span class="font-label-sm text-label-sm">Hasil</span>
+        </button>
+
+        <!-- Tab 4: Solusi -->
+        <button onclick="switchTab('solusi')" id="nav-solusi" class="nav-btn flex flex-col items-center justify-center min-w-[56px] min-h-[44px] gap-0.5 text-on-surface-variant group">
+          <div class="nav-pill w-12 h-7 rounded-full flex items-center justify-center transition-colors">
+            <span class="material-symbols-outlined text-[20px]">checklist</span>
+          </div>
+          <span class="font-label-sm text-label-sm">Solusi</span>
+        </button>
+
+        <!-- Tab 5: Riwayat -->
+        <button onclick="switchTab('riwayat')" id="nav-riwayat" class="nav-btn flex flex-col items-center justify-center min-w-[56px] min-h-[44px] gap-0.5 text-on-surface-variant group">
+          <div class="nav-pill w-12 h-7 rounded-full flex items-center justify-center transition-colors">
+            <span class="material-symbols-outlined text-[20px]">monitoring</span>
+          </div>
+          <span class="font-label-sm text-label-sm">Riwayat</span>
+        </button>
+
+      </div>
+    </nav>
+
+  </div>
+
+  <!-- JavaScript Client Logic -->
+  <script>
+    const tabNames = {
+      'beranda': 'Beranda',
+      'input': 'Input Evaluasi',
+      'hasil': 'Hasil Inferensi',
+      'solusi': 'Panduan Tindakan',
+      'riwayat': 'Riwayat Evaluasi'
+    };
+
+    function switchTab(targetTab) {
+      // Sembunyikan semua tab content
+      document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+      const activeSection = document.getElementById('tab-' + targetTab);
+      if (activeSection) {
+        activeSection.classList.add('active');
+      }
+
+      // Reset style tombol navigasi
+      document.querySelectorAll('.nav-btn').forEach(btn => {
+        btn.classList.remove('[&>.nav-pill]:bg-secondary-container', '[&>.nav-pill>.material-symbols-outlined]:text-on-secondary-container', '[&>span]:text-primary', '[&>span]:font-semibold');
+      });
+
+      // Aktifkan style tombol yang dipilih
+      const activeBtn = document.getElementById('nav-' + targetTab);
+      if (activeBtn) {
+        activeBtn.classList.add('[&>.nav-pill]:bg-secondary-container', '[&>.nav-pill>.material-symbols-outlined]:text-on-secondary-container', '[&>span]:text-primary', '[&>span]:font-semibold');
+      }
+
+      // Update label di header
+      document.getElementById('top-current-tab-label').innerText = tabNames[targetTab] || 'Beranda';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function getTargetTempForAge(age) {
+      if (age <= 3) return 33.0;
+      if (age <= 7) return 31.5;
+      if (age <= 14) return 29.0;
+      if (age <= 21) return 27.0;
+      if (age <= 28) return 24.5;
+      if (age <= 35) return 22.5;
+      return 21.0;
+    }
+
+    function updateInputPreview() {
+      const age = parseInt(document.getElementById('input_age').value) || 21;
+      const temp = parseFloat(document.getElementById('input_temperature').value) || 27.0;
+      const rh = parseFloat(document.getElementById('input_humidity').value) || 65;
+
+      const targetTemp = getTargetTempForAge(age);
+      const dev = (temp - targetTemp).toFixed(1);
+
+      document.getElementById('preview-target-temp').innerText = `Suhu Target: ${targetTemp.toFixed(1)}°C`;
+      document.getElementById('preview-temp-dev').innerText = `Deviasi: ${dev >= 0 ? '+' : ''}${dev}°C`;
+
+      // Update Phase Badge
+      const phaseBadge = document.getElementById('detected-phase-badge');
+      if (age <= 14) {
+        phaseBadge.innerText = 'Starter (Brooding 0-14)';
+      } else if (age <= 28) {
+        phaseBadge.innerText = 'Grower (15-28 Hari)';
+      } else {
+        phaseBadge.innerText = 'Finisher (29-42 Hari)';
+      }
+
+      // Update RH status preview
+      const rhBadge = document.getElementById('preview-rh-status');
+      if (rh < 55) {
+        rhBadge.innerText = 'Kering (< 55%)';
+        rhBadge.className = 'font-label-sm text-label-sm font-bold text-amber-700 bg-amber-50 px-2 py-0.5 rounded-full';
+      } else if (rh > 75) {
+        rhBadge.innerText = 'Terlalu Lembab (> 75%)';
+        rhBadge.className = 'font-label-sm text-label-sm font-bold text-amber-700 bg-amber-50 px-2 py-0.5 rounded-full';
+      } else {
+        rhBadge.innerText = 'Ideal (60-70%)';
+        rhBadge.className = 'font-label-sm text-label-sm font-bold text-emerald-800 bg-emerald-50 px-2 py-0.5 rounded-full';
+      }
+    }
+
+    async function handleEvaluationSubmit(event) {
+      event.preventDefault();
+      const btn = document.getElementById('btnSubmitEval');
+      btn.disabled = true;
+      btn.innerText = 'Menghitung Fuzzy...';
+
+      const age = parseInt(document.getElementById('input_age').value);
+      const temperature = parseFloat(document.getElementById('input_temperature').value);
+      const humidity = parseFloat(document.getElementById('input_humidity').value);
+
+      try {
+        const response = await fetch('/api/evaluate', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ age, temperature, humidity })
+        });
+
+        const data = await response.json();
+        if (data.status === 'success') {
+          const res = data.data;
+
+          // Perbarui tampilan Beranda
+          document.getElementById('top-flock-badge').innerText = `Kandang Blok A (Hari ke-${res.age})`;
+          document.getElementById('hero-score-val').innerText = Math.round(res.score_mamdani);
+          document.getElementById('hero-progress-bar').style.width = `${res.score_mamdani}%`;
+          document.getElementById('hero-condition-title').innerText = res.condition_title;
+          document.getElementById('hero-condition-subtitle').innerText = res.condition_subtitle;
+
+          document.getElementById('grid-age-val').innerText = res.age;
+          document.getElementById('grid-phase-val').innerText = res.age_phase;
+          document.getElementById('grid-temp-val').innerText = res.temperature.toFixed(1);
+          document.getElementById('grid-target-temp').innerText = `Target: ${Math.round(res.target_temp)}°C`;
+          document.getElementById('grid-rh-val').innerText = Math.round(res.humidity);
+          document.getElementById('rec-summary-text').innerText = res.recommendation_summary;
+
+          // Perbarui tampilan Hasil
+          document.getElementById('res-category-badge').innerText = res.category;
+          document.getElementById('res-score-mamdani').innerText = res.score_mamdani.toFixed(1);
+          document.getElementById('res-score-sugeno').innerText = res.score_sugeno.toFixed(1);
+          document.getElementById('res-phase-text').innerText = res.age_phase;
+          document.getElementById('res-dev-text').innerText = `${res.temp_deviation >= 0 ? '+' : ''}${res.temp_deviation.toFixed(1)}°C (Target: ${Math.round(res.target_temp)}°C)`;
+          document.getElementById('res-rh-text').innerText = `${Math.round(res.humidity)}% (${res.humidity_status})`;
+
+          // Perbarui tampilan Solusi
+          document.getElementById('sol-summary-text').innerText = res.recommendation_summary;
+          document.getElementById('sol-priority-badge').innerText = res.recommendation_priority;
+
+          const detailsContainer = document.getElementById('sol-details-container');
+          detailsContainer.innerHTML = '';
+          res.recommendation_details.forEach(item => {
+            const card = document.createElement('div');
+            card.className = 'rounded-xl bg-surface-container-lowest p-space-md shadow-sm flex items-start gap-space-sm';
+            card.innerHTML = `
+              <div class="w-10 h-10 rounded-full bg-secondary-container flex items-center justify-center text-primary shrink-0 mt-0.5">
+                <span class="material-symbols-outlined text-[22px]">${item.icon}</span>
+              </div>
+              <div class="flex flex-col flex-1">
+                <span class="font-headline-sm text-[16px] text-on-surface font-bold">${item.title}</span>
+                <p class="font-body-sm text-body-sm text-on-surface-variant mt-1 leading-snug">${item.action}</p>
+              </div>
+            `;
+            detailsContainer.appendChild(card);
+          });
+
+          // Pindah ke tab Hasil
+          switchTab('hasil');
+        } else {
+          alert('Gagal melakukan evaluasi: ' + data.message);
+        }
+      } catch (err) {
+        alert('Terjadi kesalahan jaringan atau server lokal: ' + err.message);
+      } finally {
+        btn.disabled = false;
+        btn.innerHTML = '<span class="material-symbols-outlined text-[24px]">psychology</span><span>Jalankan Inferensi Fuzzy</span>';
+      }
+    }
+
+    // Inisialisasi awal
+    updateInputPreview();
+  </script>
+</body>
+</html>
